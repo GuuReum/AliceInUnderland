@@ -22,6 +22,7 @@
         </activity>
 
         <activity android:name=".MainPlaying"/>
+        <activity android:name=".MainEnd"/>
     </application>
 
 </manifest>
