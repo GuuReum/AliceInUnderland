@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//게임 종료 화면
 public class MainEnd extends AppCompatActivity {
 
     @Override
