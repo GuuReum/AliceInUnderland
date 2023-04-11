@@ -2,7 +2,6 @@ package com.example.aliceinunderland;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -10,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 //게임 중 화면
 public class MainPlaying extends AppCompatActivity {
@@ -24,8 +25,8 @@ public class MainPlaying extends AppCompatActivity {
         timer.start();
     }
 
-    //타이머 구현
-    private long MaxPlayTime = 900000;
+    //타이머 구현 line:28~57
+    private long MaxPlayTime = 900000; //15분
     private long temp_time;
     private TextView countdownText;
     CountDownTimer timer = new CountDownTimer(MaxPlayTime, 1000) {
@@ -66,6 +67,8 @@ public class MainPlaying extends AppCompatActivity {
         TextView moving = (TextView) findViewById(R.id.test);
         moving.setText("Move to Right");
     }
+
+    //김재휘: 총알의 개수는 player에서 관리하도록 설정하기
     int remainBullets = 5;
     
     //재장전 버튼 추가
@@ -75,8 +78,9 @@ public class MainPlaying extends AppCompatActivity {
 
         //남은 총알의 개수 초기화
         remainBullets = 5;
-        
-        //총알의 이미지 표시
+
+        ImageView[] bullet;
+        //김재휘: 총알의 이미지 표시, bullet 배열로 관리 & 반복문으로 수정
         ImageView bullet1 = (ImageView)findViewById(R.id.bullet1);
         ImageView bullet2 = (ImageView)findViewById(R.id.bullet2);
         ImageView bullet3 = (ImageView)findViewById(R.id.bullet3);

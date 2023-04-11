@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    //Game Start -> 게임 activity로 전환
     public void ClickStartButton(View v) {
-
         Intent intent = new Intent(this,MainPlaying.class);
         startActivity(intent);
     }
