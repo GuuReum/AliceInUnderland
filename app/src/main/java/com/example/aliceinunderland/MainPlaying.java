@@ -56,6 +56,8 @@ public class MainPlaying extends AppCompatActivity {
         countdownText.setText(Left_time);
     }
 
+    Player player = new Player();
+
     //왼쪽으로 이동 버튼(구현필요)
     public void ClickLeftButton(View v) {
         TextView moving = (TextView) findViewById(R.id.test);
@@ -67,38 +69,32 @@ public class MainPlaying extends AppCompatActivity {
         TextView moving = (TextView) findViewById(R.id.test);
         moving.setText("Move to Right");
     }
-
-    //김재휘: 총알의 개수는 player에서 관리하도록 설정하기
-    int remainBullets = 5;
     
     //재장전 버튼 추가
     public void ClickReloadButton(View v) {
         TextView moving = (TextView) findViewById(R.id.test);
         moving.setText("Reload Magazine");
 
-        //남은 총알의 개수 초기화
-        remainBullets = 5;
+        //재장전
+        player.reloadBullet();
 
-        ImageView[] bullet;
-        //김재휘: 총알의 이미지 표시, bullet 배열로 관리 & 반복문으로 수정
-        ImageView bullet1 = (ImageView)findViewById(R.id.bullet1);
-        ImageView bullet2 = (ImageView)findViewById(R.id.bullet2);
-        ImageView bullet3 = (ImageView)findViewById(R.id.bullet3);
-        ImageView bullet4 = (ImageView)findViewById(R.id.bullet4);
-        ImageView bullet5 = (ImageView)findViewById(R.id.bullet5);
+        ImageView[] bullet = new ImageView[4];
+        //TODO:김재휘_ 총알의 이미지 표시->bullet 이미지 하나만 가지고 관리할 수는 없을까?
+        bullet[0] = (ImageView)findViewById(R.id.bullet1);
+        bullet[1] = (ImageView)findViewById(R.id.bullet2);
+        bullet[2] = (ImageView)findViewById(R.id.bullet3);
+        bullet[3] = (ImageView)findViewById(R.id.bullet4);
+        bullet[4] = (ImageView)findViewById(R.id.bullet5);
 
-        bullet1.setVisibility(View.VISIBLE);
-        bullet2.setVisibility(View.VISIBLE);
-        bullet3.setVisibility(View.VISIBLE);
-        bullet4.setVisibility(View.VISIBLE);
-        bullet5.setVisibility(View.VISIBLE);
+        for(int i = 0; i < bullet.length; i++)
+            bullet[i].setVisibility(View.VISIBLE);
     }
     //shoot Button 구현
     public void ClickShootButton(View v) {
 
         TextView shooting = (TextView) findViewById(R.id.test);
 
-        switch (remainBullets){
+        switch (player.getBullet()){
             case 0:
                 //player have 0 bullet -> print need to reload
                 shooting.setText("Not Enough Bullets");
@@ -109,7 +105,7 @@ public class MainPlaying extends AppCompatActivity {
 
                 ImageView bullet1 = (ImageView)findViewById(R.id.bullet1);
                 bullet1.setVisibility(View.INVISIBLE);
-                remainBullets--;
+                player.shootBullet();
 
                 break;
             case 2:
@@ -117,7 +113,7 @@ public class MainPlaying extends AppCompatActivity {
 
                 ImageView bullet2 = (ImageView)findViewById(R.id.bullet2);
                 bullet2.setVisibility(View.INVISIBLE);
-                remainBullets--;
+                player.shootBullet();
 
                 break;
             case 3:
@@ -125,7 +121,7 @@ public class MainPlaying extends AppCompatActivity {
 
                 ImageView bullet3 = (ImageView)findViewById(R.id.bullet3);
                 bullet3.setVisibility(View.INVISIBLE);
-                remainBullets--;
+                player.shootBullet();
 
                 break;
             case 4:
@@ -133,7 +129,7 @@ public class MainPlaying extends AppCompatActivity {
 
                 ImageView bullet4 = (ImageView)findViewById(R.id.bullet4);
                 bullet4.setVisibility(View.INVISIBLE);
-                remainBullets--;
+                player.shootBullet();
 
                 break;
             case 5:
@@ -141,7 +137,7 @@ public class MainPlaying extends AppCompatActivity {
 
                 ImageView bullet5 = (ImageView)findViewById(R.id.bullet5);
                 bullet5.setVisibility(View.INVISIBLE);
-                remainBullets--;
+                player.shootBullet();
 
                 break;
         }
