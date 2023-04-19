@@ -56,14 +56,13 @@
         android:id="@+id/Move_to_Right"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:onClick="ClickRightButton"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Move_to_Left"
-        app:srcCompat="@drawable/temp_moveright" />
+        app:srcCompat="@drawable/moveright" />
 
     <ImageButton
         android:id="@+id/Move_to_Left"
@@ -76,7 +75,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/temp_moveleft" />
+        app:srcCompat="@drawable/moveleft" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -85,7 +84,7 @@
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/remainbullet"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toEndOf="@+id/Move_to_Right">
 
@@ -147,6 +146,6 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/temp_reload" />
+        app:srcCompat="@drawable/reload" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
