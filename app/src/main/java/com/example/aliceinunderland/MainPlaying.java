@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,7 +71,7 @@ public class MainPlaying extends AppCompatActivity {
         moving.setText("Move to Right");
     }
     
-    //재장전 버튼 추가
+    //재장전 버튼
     public void ClickReloadButton(View v) {
         TextView moving = (TextView) findViewById(R.id.test);
         moving.setText("Reload Magazine");
@@ -89,58 +90,79 @@ public class MainPlaying extends AppCompatActivity {
         for(int i = 0; i < bullet.length; i++)
             bullet[i].setVisibility(View.VISIBLE);
     }
-    //shoot Button 구현
-    public void ClickShootButton(View v) {
 
-        TextView shooting = (TextView) findViewById(R.id.test);
-
-        switch (player.getBullet()){
-            case 0:
-                //player have 0 bullet -> print need to reload
-                shooting.setText("Not Enough Bullets");
-                break;
-                //player have bullet -> invisible one bullet & remove one bullet
-            case 1:
-                shooting.setText("Shot0");
-
-                ImageView bullet1 = (ImageView)findViewById(R.id.bullet1);
-                bullet1.setVisibility(View.INVISIBLE);
-                player.shootBullet();
+    //화면 터치 시 총알 발사 이벤트
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        switch(event.getAction()){
+            case MotionEvent.ACTION_DOWN:{
 
                 break;
-            case 2:
-                shooting.setText("Shot1");
-
-                ImageView bullet2 = (ImageView)findViewById(R.id.bullet2);
-                bullet2.setVisibility(View.INVISIBLE);
-                player.shootBullet();
+            }
+            case MotionEvent.ACTION_MOVE:{
 
                 break;
-            case 3:
-                shooting.setText("Shot2");
+            }
+            //손가락을 떼면 총알 발사
+            case MotionEvent.ACTION_UP:{
+                TextView shooting = (TextView) findViewById(R.id.test);
 
-                ImageView bullet3 = (ImageView)findViewById(R.id.bullet3);
-                bullet3.setVisibility(View.INVISIBLE);
-                player.shootBullet();
+                switch (player.getBullet()){
+                    case 0:
+                        //player have 0 bullet -> print need to reload
+                        shooting.setText("Not Enough Bullets");
+                        break;
+                    //player have bullet -> invisible one bullet & remove one bullet
+                    case 1:
+                        shooting.setText("Shot0");
+
+                        ImageView bullet1 = (ImageView)findViewById(R.id.bullet1);
+                        bullet1.setVisibility(View.INVISIBLE);
+                        player.shootBullet();
+
+                        break;
+                    case 2:
+                        shooting.setText("Shot1");
+
+                        ImageView bullet2 = (ImageView)findViewById(R.id.bullet2);
+                        bullet2.setVisibility(View.INVISIBLE);
+                        player.shootBullet();
+
+                        break;
+                    case 3:
+                        shooting.setText("Shot2");
+
+                        ImageView bullet3 = (ImageView)findViewById(R.id.bullet3);
+                        bullet3.setVisibility(View.INVISIBLE);
+                        player.shootBullet();
+
+                        break;
+                    case 4:
+                        shooting.setText("Shot3");
+
+                        ImageView bullet4 = (ImageView)findViewById(R.id.bullet4);
+                        bullet4.setVisibility(View.INVISIBLE);
+                        player.shootBullet();
+
+                        break;
+                    case 5:
+                        shooting.setText("Shot4");
+
+                        ImageView bullet5 = (ImageView)findViewById(R.id.bullet5);
+                        bullet5.setVisibility(View.INVISIBLE);
+                        player.shootBullet();
+
+                        break;
+                }
+                break;
+            }
+            case MotionEvent.ACTION_CANCEL:{
 
                 break;
-            case 4:
-                shooting.setText("Shot3");
-
-                ImageView bullet4 = (ImageView)findViewById(R.id.bullet4);
-                bullet4.setVisibility(View.INVISIBLE);
-                player.shootBullet();
-
-                break;
-            case 5:
-                shooting.setText("Shot4");
-
-                ImageView bullet5 = (ImageView)findViewById(R.id.bullet5);
-                bullet5.setVisibility(View.INVISIBLE);
-                player.shootBullet();
-
+            }
+            default:
                 break;
         }
-
+        return true;
     }
 }

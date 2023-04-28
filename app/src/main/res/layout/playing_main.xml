@@ -30,19 +30,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.107" />
 
-    <Button
-        android:id="@+id/temp_shoot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="ClickShootButton"
-        android:text="Shoot"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toEndOf="@+id/TimeText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.382" />
-
     <TextView
         android:id="@+id/TimeText"
         android:layout_width="wrap_content"
