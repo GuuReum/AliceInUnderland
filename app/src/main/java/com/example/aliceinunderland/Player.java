@@ -1,24 +1,44 @@
 package com.example.aliceinunderland;
 
 
+import android.content.Context;
+import android.os.Handler;
+
 //플레이어 클래스..
 public class Player {
-    private int loadedBullet = 5; //장전된 총알
+    Player(Context c) {
+        mainPlayingContext = c;
+    }
 
+    private int loadedBullet = 5; //장전된 총알
     private int remainBullet = 10;  //여분 총알
+    private boolean shootAble = true; // 사격 가능 여부
+    private Context mainPlayingContext;
 
 
     //총알 한 발 사격
-    public String shootBullet(float x, float y){
+    public String shootBullet(float shootVectorX, float shootVectorY) {
 
-        switch (loadedBullet){
+        switch (loadedBullet) {
             case 0:
                 return "Not enough ammo";
-            default :
+            default:
                 loadedBullet--;
-                return "("+x+","+y+")";
+                return "(" + shootVectorX + "," + shootVectorY + ")";
         }
     }
+
+    public void shootCoolDown() {
+        shootAble = false;
+        new Handler().postDelayed(new Runnable() {  // 0.7초뒤에 사격 가능
+            @Override
+            public void run() {
+                shootAble = true;
+                ((MainPlaying) mainPlayingContext).moving.setText("Ready For Shoot!!");
+            }
+        }, 700);
+    }
+
 
     public void makeMagEmpty() {
         remainBullet += loadedBullet;
@@ -27,15 +47,34 @@ public class Player {
 
     //총알 재장전
     public void reloadBullet() {
-        if (remainBullet>0) {
+        if ((remainBullet > 0) || (loadedBullet < 5)) {
             loadedBullet++;
             remainBullet--;
         }
     }
 
-    //return 총알의 개수
-    public int getLoadedBullet(){
+    //return 장전된 총알의 개수
+    public int getLoadedBullet() {
         return loadedBullet;
     }
-    public int getRemainBullet() {return remainBullet;}
+
+    //return 남은 총알의 개수
+    public int getRemainBullet() {
+        return remainBullet;
+    }
+
+    //return 사격 가능 여부
+    public boolean isShootAble() {
+        return shootAble;
+    }
+
+    //사격 가능한 상태로 전환
+    public void setShootAble(){
+        shootAble = true;
+    }
+
+    //사격 불가능한 상태로 전환
+    public void setShootDisable(){
+        shootAble = false;
+    }
 }

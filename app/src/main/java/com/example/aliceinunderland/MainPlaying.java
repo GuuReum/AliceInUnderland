@@ -15,8 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 //게임 중 화면
 public class MainPlaying extends AppCompatActivity {
-    Player player = new Player();
+    Player player = new Player(this);
     public TextView countdownText;
+    public TextView moving;
     private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
 
     @Override
@@ -28,22 +29,10 @@ public class MainPlaying extends AppCompatActivity {
         countdownText = findViewById(R.id.TimeText);
         playTimer.start();
         //temp_text view
-        TextView moving = (TextView) findViewById(R.id.test);
-
-
-
-
-
-
-
-
-
-
-
-
+        moving = (TextView) findViewById(R.id.test);
 
         //화면 터치 시 발사 이벤트
-        View shootview =findViewById(R.id.ShootTouchView);
+        View shootview = findViewById(R.id.ShootTouchView);
         shootview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -52,13 +41,13 @@ public class MainPlaying extends AppCompatActivity {
                 float curY = event.getY();  //눌린 곳의 Y좌표
 
                 String posOftouch = new String();
-                if(shootenable) {
+                if (player.isShootAble()) {
                     switch (action) {
                         case MotionEvent.ACTION_DOWN:
                             loadBulletImage();
                             posOftouch = player.shootBullet(curX, curY);
                             moving.setText(posOftouch);
-                            shootCooldown();
+                            player.shootCoolDown();
                             break;
                     }
                 }
@@ -81,22 +70,25 @@ public class MainPlaying extends AppCompatActivity {
         TextView moving = (TextView) findViewById(R.id.test);
         moving.setText("Move to Right");
     }
-
+/*
     //사격 쿨타임 구현
     boolean shootenable = true;
+
     private void shootCooldown() {
 
         shootenable = false;
 
         new Handler().postDelayed(new Runnable() {  // 0.7초뒤에 사격 가능
-                    @Override
-                    public void run() {
-                        shootenable = true;
-                        TextView moving = (TextView) findViewById(R.id.test);
+            @Override
+            public void run() {
+                shootenable = true;
+                TextView moving = (TextView) findViewById(R.id.test);
                 moving.setText("Ready for shoot");
             }
-        },700);
+        }, 700);
     }
+
+ */
 
     //재장전 버튼 추가
     public void ClickReloadButton(View v) {
@@ -106,11 +98,11 @@ public class MainPlaying extends AppCompatActivity {
 
         ImageView[] bullet = new ImageView[5];
         //TODO:김재휘_ 총알의 이미지 표시->bullet 이미지 하나만 가지고 관리할 수는 없을까?
-        bullet[0] = (ImageView)findViewById(R.id.bullet1);
-        bullet[1] = (ImageView)findViewById(R.id.bullet2);
-        bullet[2] = (ImageView)findViewById(R.id.bullet3);
-        bullet[3] = (ImageView)findViewById(R.id.bullet4);
-        bullet[4] = (ImageView)findViewById(R.id.bullet5);
+        bullet[0] = (ImageView) findViewById(R.id.bullet1);
+        bullet[1] = (ImageView) findViewById(R.id.bullet2);
+        bullet[2] = (ImageView) findViewById(R.id.bullet3);
+        bullet[3] = (ImageView) findViewById(R.id.bullet4);
+        bullet[4] = (ImageView) findViewById(R.id.bullet5);
 
         moving.setText("Reloading Magazine...");
 
@@ -122,7 +114,7 @@ public class MainPlaying extends AppCompatActivity {
         }
 
         //사격 금지
-        shootenable = false;
+        player.setShootDisable();
 
         reloadloop:
         for (int i = 0; i < bullet.length; i++) {
@@ -134,22 +126,22 @@ public class MainPlaying extends AppCompatActivity {
                 @Override
                 public void run() {
 
-                    if (player.getRemainBullet()>0) {
+                    if (player.getRemainBullet() > 0) {
                         bullet[j].setImageResource(R.drawable.temp_mag); //이미지
                         player.reloadBullet();
-                        remaining.setText(""+player.getRemainBullet());
+                        remaining.setText("" + player.getRemainBullet());
                     } else {
                         moving.setText("Reload complete");
-                        shootenable = true;
+                        player.setShootAble();
                         return;
                     }
 
-                    if (j==4) {
+                    if (j == 4) {
                         moving.setText("Reload complete");
-                        shootenable = true;
+                        player.setShootAble();
                     }
                 }
-            },300*i);
+            }, 300 * i);
 
         }
 
@@ -160,22 +152,22 @@ public class MainPlaying extends AppCompatActivity {
 
         ImageView[] bullet = new ImageView[5];
         //TODO:김재휘_ 총알의 이미지 표시->bullet 이미지 하나만 가지고 관리할 수는 없을까?
-        bullet[0] = (ImageView)findViewById(R.id.bullet1);
-        bullet[1] = (ImageView)findViewById(R.id.bullet2);
-        bullet[2] = (ImageView)findViewById(R.id.bullet3);
-        bullet[3] = (ImageView)findViewById(R.id.bullet4);
-        bullet[4] = (ImageView)findViewById(R.id.bullet5);
+        bullet[0] = (ImageView) findViewById(R.id.bullet1);
+        bullet[1] = (ImageView) findViewById(R.id.bullet2);
+        bullet[2] = (ImageView) findViewById(R.id.bullet3);
+        bullet[3] = (ImageView) findViewById(R.id.bullet4);
+        bullet[4] = (ImageView) findViewById(R.id.bullet5);
 
         int i = player.getLoadedBullet();
 
-        switch (i){
+        switch (i) {
             case 0:
                 //player have 0 bullet -> print need to reload
                 break;
             //player have bullet -> invisible one bullet & remove one bullet
             default:
 
-                bullet[i-1].setImageResource(R.drawable.temp_emptymag);
+                bullet[i - 1].setImageResource(R.drawable.temp_emptymag);
 
                 break;
         }
