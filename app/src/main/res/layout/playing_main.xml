@@ -7,16 +7,16 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/gameProta"
+        android:id="@+id/GameProta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
 
+        app:layout_constraintEnd_toEndOf="@+id/ShootTouchView"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.639"
+        app:layout_constraintVertical_bias="0.97"
         app:srcCompat="@drawable/prota_64" />
 
     <TextView
@@ -53,7 +53,7 @@
         app:layout_constraintVertical_bias="0.012" />
 
     <ImageButton
-        android:id="@+id/Move_to_Right"
+        android:id="@+id/MoveRightBtn"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="8dp"
@@ -61,11 +61,11 @@
         android:onClick="ClickRightButton"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Move_to_Left"
+        app:layout_constraintStart_toEndOf="@+id/MoveLeftBtn"
         app:srcCompat="@drawable/moveright" />
 
     <ImageButton
-        android:id="@+id/Move_to_Left"
+        android:id="@+id/MoveLeftBtn"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="4dp"
@@ -86,7 +86,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/remainbullet"
         app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toEndOf="@+id/Move_to_Right">
+        app:layout_constraintStart_toEndOf="@+id/MoveRightBtn">
 
         <ImageView
             android:id="@+id/bullet1"
@@ -132,12 +132,12 @@
         android:layout_marginEnd="24dp"
         android:text="Remain\nbullet"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Reload"
+        app:layout_constraintEnd_toStartOf="@+id/ReloadBtn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.89" />
 
     <ImageButton
-        android:id="@+id/Reload"
+        android:id="@+id/ReloadBtn"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="8dp"
