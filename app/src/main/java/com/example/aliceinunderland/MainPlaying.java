@@ -15,16 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 //게임 중 화면
 public class MainPlaying extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.playing_main);
 
         countdownText = findViewById(R.id.TimeText);
-
         timer.start();
 
         //temp_text view
@@ -56,37 +53,36 @@ public class MainPlaying extends AppCompatActivity {
         });
     }
 
-    //타이머 구현
-    private long MaxPlayTime = 900000; //15분
-    private long temp_time;
+
+
+
+    //타이머
     private TextView countdownText;
-    CountDownTimer timer = new CountDownTimer(MaxPlayTime, 1000) {
+    PlayTimer playTimer = new PlayTimer();
+    CountDownTimer timer = new CountDownTimer(playTimer.getMaxPlayTime(), 1000) {
 
         @Override
-        public void onTick(long l) {
-            temp_time = l;
-            updateTimer();
+        public void onTick(long remainTime) {
+            playTimer.setRemainTime(remainTime);
+            countdownText.setText(playTimer.setRemainTime());
         }
         @Override
         public void onFinish() {
             Intent intent = new Intent(MainPlaying.this,MainEnd.class);
             startActivity(intent);
-
             finish();
         }
     };
 
-    //남은 플레이 시간 표시
-    private void updateTimer() {
 
-        int minute = (int) temp_time % 3600000 / 60000;
-        int seconds = (int) temp_time % 3600000 % 60000 / 1000;
 
-        String Left_time = "" + minute + ":" + seconds;
 
-        countdownText.setText(Left_time);
-    }
-    //타임 구현 끝
+
+
+
+
+
+
 
     //사격 쿨타임 구현
     boolean shootenable = true;
