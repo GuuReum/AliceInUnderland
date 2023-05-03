@@ -1,9 +1,7 @@
 package com.example.aliceinunderland;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainPlaying extends AppCompatActivity {
     Player player = new Player(this);
     public TextView countdownText;
-    public TextView moving;
+    public TextView tempTextPrint;
     private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
 
     @Override
@@ -28,30 +26,22 @@ public class MainPlaying extends AppCompatActivity {
 
         countdownText = findViewById(R.id.TimeText);
         playTimer.start();
-        //temp_text view
-        moving = (TextView) findViewById(R.id.test);
+        tempTextPrint = (TextView) findViewById(R.id.test);
 
         //화면 터치 시 발사 이벤트
         View shootview = findViewById(R.id.ShootTouchView);
         shootview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
                 float curX = event.getX();  //눌린 곳의 X좌표
                 float curY = event.getY();  //눌린 곳의 Y좌표
 
-                String posOftouch = new String();
                 if (player.isShootAble()) {
-                    switch (action) {
-                        case MotionEvent.ACTION_DOWN:
-                            loadBulletImage();
-                            posOftouch = player.shootBullet(curX, curY);
-                            moving.setText(posOftouch);
-                            player.shootCoolDown();
-                            break;
+                    if(event.getAction() == MotionEvent.ACTION_UP){
+                        loadBulletImage();
+                        player.shootBullet(curX, curY);
                     }
                 }
-
                 return true;
             }
         });
@@ -70,25 +60,6 @@ public class MainPlaying extends AppCompatActivity {
         TextView moving = (TextView) findViewById(R.id.test);
         moving.setText("Move to Right");
     }
-/*
-    //사격 쿨타임 구현
-    boolean shootenable = true;
-
-    private void shootCooldown() {
-
-        shootenable = false;
-
-        new Handler().postDelayed(new Runnable() {  // 0.7초뒤에 사격 가능
-            @Override
-            public void run() {
-                shootenable = true;
-                TextView moving = (TextView) findViewById(R.id.test);
-                moving.setText("Ready for shoot");
-            }
-        }, 700);
-    }
-
- */
 
     //재장전 버튼 추가
     public void ClickReloadButton(View v) {
