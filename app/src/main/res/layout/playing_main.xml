@@ -8,16 +8,28 @@
 
     <ImageView
         android:id="@+id/GameProta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="89dp"
+        android:layout_height="94dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
 
         app:layout_constraintEnd_toEndOf="@+id/ShootTouchView"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/prota_64" />
+
+    <ImageView
+        android:id="@+id/enemyBot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/GameProta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="@+id/ShootTouchView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/botbot" />
 
     <TextView
         android:id="@+id/test"
@@ -47,10 +59,10 @@
         android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.012" />
+        app:layout_constraintVertical_bias="0.027" />
 
     <ImageButton
         android:id="@+id/MoveRightBtn"
