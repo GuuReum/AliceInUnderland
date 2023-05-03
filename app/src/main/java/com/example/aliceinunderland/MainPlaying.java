@@ -15,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 //게임 중 화면
 public class MainPlaying extends AppCompatActivity {
+    Player player = new Player();
+    public TextView countdownText;
+    private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -22,10 +26,21 @@ public class MainPlaying extends AppCompatActivity {
         setContentView(R.layout.playing_main);
 
         countdownText = findViewById(R.id.TimeText);
-        timer.start();
-
+        playTimer.start();
         //temp_text view
         TextView moving = (TextView) findViewById(R.id.test);
+
+
+
+
+
+
+
+
+
+
+
+
 
         //화면 터치 시 발사 이벤트
         View shootview =findViewById(R.id.ShootTouchView);
@@ -53,58 +68,6 @@ public class MainPlaying extends AppCompatActivity {
         });
     }
 
-
-
-
-    //타이머
-    private TextView countdownText;
-    PlayTimer playTimer = new PlayTimer();
-    CountDownTimer timer = new CountDownTimer(playTimer.getMaxPlayTime(), 1000) {
-
-        @Override
-        public void onTick(long remainTime) {
-            playTimer.setRemainTime(remainTime);
-            countdownText.setText(playTimer.setRemainTime());
-        }
-        @Override
-        public void onFinish() {
-            Intent intent = new Intent(MainPlaying.this,MainEnd.class);
-            startActivity(intent);
-            finish();
-        }
-    };
-
-
-
-
-
-
-
-
-
-
-
-    //사격 쿨타임 구현
-    boolean shootenable = true;
-    private void shootCooldown() {
-
-        shootenable = false;
-
-        new Handler().postDelayed(new Runnable() {  // 0.7초뒤에 사격 가능
-            @Override
-            public void run() {
-                shootenable = true;
-                TextView moving = (TextView) findViewById(R.id.test);
-                moving.setText("Ready for shoot");
-            }
-        },700);
-    }
-
-
-    Player player = new Player();
-
-
-
     //왼쪽으로 이동 버튼(구현필요)
     public void ClickLeftButton(View v) {
         //temp_text view
@@ -117,6 +80,22 @@ public class MainPlaying extends AppCompatActivity {
         //temp_text view
         TextView moving = (TextView) findViewById(R.id.test);
         moving.setText("Move to Right");
+    }
+
+    //사격 쿨타임 구현
+    boolean shootenable = true;
+    private void shootCooldown() {
+
+        shootenable = false;
+
+        new Handler().postDelayed(new Runnable() {  // 0.7초뒤에 사격 가능
+                    @Override
+                    public void run() {
+                        shootenable = true;
+                        TextView moving = (TextView) findViewById(R.id.test);
+                moving.setText("Ready for shoot");
+            }
+        },700);
     }
 
     //재장전 버튼 추가
@@ -175,7 +154,6 @@ public class MainPlaying extends AppCompatActivity {
         }
 
     }
-
 
     //사격 후 이미지 불러오기
     public void loadBulletImage() {
