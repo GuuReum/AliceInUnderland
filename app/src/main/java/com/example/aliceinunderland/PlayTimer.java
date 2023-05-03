@@ -8,24 +8,24 @@ import android.os.CountDownTimer;
 public class PlayTimer extends CountDownTimer {
     public PlayTimer(long maxPlayTime, long coolDownTime, Context mContext) {
         super(maxPlayTime, coolDownTime);
-        mainActivityContext = mContext;
+        mainPlayingContext = mContext;
     }
 
     private long remainTime;
     private String txt;
-    private final Context mainActivityContext;
+    private final Context mainPlayingContext;
 
     @Override
     public void onTick(long time) { // coolDownTime마다 시간을 갱신해서 Timer 텍스트뷰에 표시해줌
         remainTime = time;
         txt = ((int) remainTime % 3600000 / 60000) + ":" + ((int) remainTime % 3600000 % 60000 / 1000);
-        ((MainPlaying) mainActivityContext).countdownText.setText(txt);
+        ((MainPlaying) mainPlayingContext).countdownText.setText(txt);
     }
 
     @Override
     public void onFinish() { // 타이머의 시간이 0이 된다면 게임 클리어!
-        Intent intent = new Intent(mainActivityContext, MainEnd.class);
-        mainActivityContext.startActivity(intent);
+        Intent intent = new Intent(mainPlayingContext, MainEnd.class);
+        mainPlayingContext.startActivity(intent);
 
         /*
         TODO:finish 함수가 없어서 MainPlaying Activity가 남아있음
