@@ -16,14 +16,14 @@ public class PlayTimer extends CountDownTimer {
     private final Context mainActivityContext;
 
     @Override
-    public void onTick(long time) {
+    public void onTick(long time) { // coolDownTime마다 시간을 갱신해서 Timer 텍스트뷰에 표시해줌
         remainTime = time;
         txt = ((int) remainTime % 3600000 / 60000) + ":" + ((int) remainTime % 3600000 % 60000 / 1000);
         ((MainPlaying) mainActivityContext).countdownText.setText(txt);
     }
 
     @Override
-    public void onFinish() {
+    public void onFinish() { // 타이머의 시간이 0이 된다면 게임 클리어!
         Intent intent = new Intent(mainActivityContext, MainEnd.class);
         mainActivityContext.startActivity(intent);
 
