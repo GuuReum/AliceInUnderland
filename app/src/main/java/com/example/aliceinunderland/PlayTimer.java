@@ -26,7 +26,7 @@ public class PlayTimer extends CountDownTimer {
     public void onFinish() { // 타이머의 시간이 0이 된다면 게임 클리어!
         Intent intent = new Intent(mainPlayingContext, MainEnd.class);
         mainPlayingContext.startActivity(intent);
-
+        //finish();
         /*
         TODO:finish 함수가 없어서 MainPlaying Activity가 남아있음
         TODO:타이머에서 사용하는 변수들만 따로 이 class에서 관리해줄지, 아니면 타이머 자체를 분리시킬지 고민해봐야 할 필요가 있음.

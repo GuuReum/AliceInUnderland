@@ -14,8 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 //게임 중 화면
 public class MainPlaying extends AppCompatActivity {
     Player player = new Player(this);
+    Enemy enemyBot = new Enemy();
+
     public TextView countdownText;
     public TextView tempTextPrint;
+
     private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
 
     @Override
@@ -122,7 +125,6 @@ public class MainPlaying extends AppCompatActivity {
     public void loadBulletImage() {
 
         ImageView[] bullet = new ImageView[5];
-        //TODO:김재휘_ 총알의 이미지 표시->bullet 이미지 하나만 가지고 관리할 수는 없을까?
         bullet[0] = (ImageView) findViewById(R.id.bullet1);
         bullet[1] = (ImageView) findViewById(R.id.bullet2);
         bullet[2] = (ImageView) findViewById(R.id.bullet3);
