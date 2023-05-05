@@ -1,24 +1,33 @@
 package com.example.aliceinunderland;
 
 import android.content.Context;
-import android.widget.ImageView;
+import android.view.View;
 
 public class Enemy {
-    Enemy(Context c, ImageView iv){
-
-    }
-    private Vector enemyVector = new Vector(); // 적의 위치
     private boolean isAlive = true; // 적의 생존 여부
+    private Context mainPlayingContext;
 
-    public boolean isDead(Vector shootVector){
-        if(isAlive) {
+    public boolean isDead(View v, float curX, float curY) {
+        if (isAlive) {
             //if botbot을 터치했다면
-            //botbot imageview 삭제
-            //2
-            isAlive = false;
-            return true;
+            if (isTouchInside(v, curX, curY)) {
+                isAlive = false;
+                return true;
+            }
         }
         //아니라면
         return false;
+    }
+
+    //터치했는지 확인
+    public boolean isTouchInside(View v, float x, float y) {
+        int[] location = new int[2];
+        v.getLocationOnScreen(location);
+
+        final int realRight = location[0] + v.getWidth();
+        final int realBottom = location[1] + v.getHeight();
+        boolean result = ((x >= location[0]) && x <= realRight) && ((y >= location[1]) && (y <= realBottom));
+
+        return result;
     }
 }

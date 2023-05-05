@@ -20,7 +20,7 @@ public class MainPlaying extends AppCompatActivity {
     public TextView tempTextPrint;
 
     private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
-    private ImageView enemyBotImageView;
+    ImageView enemyBotImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +28,11 @@ public class MainPlaying extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playing_main);
 
-        enemyBotImageView = findViewById(R.id.enemyBot);
-        enemyBot = new Enemy(this, enemyBotImageView);
+        //적 이미지뷰와 class를 만들어주고, 적의 좌표값과 사이즈 설정
+        enemyBotImageView = (ImageView) findViewById(R.id.enemyBot);
+        enemyBot = new Enemy();
 
+        //타이머 클래스 생성 및 타이머뷰 설정
         countdownText = findViewById(R.id.TimeText);
         playTimer.start();
 
@@ -45,22 +47,20 @@ public class MainPlaying extends AppCompatActivity {
                 float curY = event.getY();  //눌린 곳의 Y좌표
 
                 if (player.isShootAble()) {
-                    if(event.getAction() == MotionEvent.ACTION_UP){
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
                         loadBulletImage();
-
-                        if(enemyBot.isDead(player.shootBullet(curX, curY))){
+                        player.shootBullet(curX, curY);
+                        //총을 쏴서 적이 죽는다면 적 이미지뷰의 이미지 제거
+                        if (enemyBot.isDead(enemyBotImageView, curX, curY)) {
                             enemyBotImageView.setImageResource(0);
-                        };
-
+                        }
                     }
+                    return true;
                 }
-                return true;
+                return false;
             }
         });
     }
-
-
-
 
 
 
