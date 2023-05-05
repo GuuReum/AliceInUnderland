@@ -25,16 +25,16 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/ShootTouchView"
         app:layout_constraintEnd_toEndOf="@+id/ShootTouchView"
-        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="@+id/ShootTouchView"
         app:layout_constraintTop_toTopOf="@+id/ShootTouchView"
-        app:layout_constraintVertical_bias="0.951"
+        app:layout_constraintVertical_bias="0.952"
         app:srcCompat="@drawable/botbot" />
 
     <View
         android:id="@+id/ShootTouchView"
-        android:layout_width="match_parent"
-        android:layout_height="298dp"
+        android:layout_width="728dp"
+        android:layout_height="286dp"
         app:layout_constraintBottom_toTopOf="@+id/UILayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
