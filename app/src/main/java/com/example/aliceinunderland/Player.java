@@ -14,25 +14,18 @@ public class Player {
     private int remainBullet = 10;  //여분 총알
     private boolean shootAble = true; // 사격 가능 여부
     private Context mainPlayingContext;
-    private Vector shootVector = new Vector(); // 사격한 곳의 좌표
 
-
-    //총알 한 발 사격
-    public Vector shootBullet(float shootVectorX, float shootVectorY) {
+        //총알 한 발 사격
+    public void shootBullet(float shootVectorX, float shootVectorY) {
         //총알 개수가 0개라면 쓰레기 shootVector return
         if(loadedBullet == 0){
-            shootVector.setVector(-1, -1);
-
             ((MainPlaying) mainPlayingContext).tempTextPrint.setText("Not enough ammo");
         }else { //총알이 있다면
             loadedBullet--; //총알 개수 감소
-            shootVector.setVector(shootVectorX, shootVectorY);
             shootCoolDown();
 
             ((MainPlaying) mainPlayingContext).tempTextPrint.setText("(" + shootVectorX + "," + shootVectorY + ")");
         }
-
-        return shootVector;
     }
 
     private void shootCoolDown() {
@@ -45,7 +38,6 @@ public class Player {
             }
         }, 700);
     }
-
 
     public void makeMagEmpty() {
         remainBullet += loadedBullet;
