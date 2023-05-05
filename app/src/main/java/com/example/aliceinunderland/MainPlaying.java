@@ -13,13 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 //게임 중 화면
 public class MainPlaying extends AppCompatActivity {
-    Player player = new Player(this);
-    Enemy enemyBot = new Enemy();
+    private Player player = new Player(this);
+    Enemy enemyBot;
 
     public TextView countdownText;
     public TextView tempTextPrint;
 
     private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
+    private ImageView enemyBotImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +28,12 @@ public class MainPlaying extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playing_main);
 
+        enemyBotImageView = findViewById(R.id.enemyBot);
+        enemyBot = new Enemy(this, enemyBotImageView);
+
         countdownText = findViewById(R.id.TimeText);
         playTimer.start();
+
         tempTextPrint = (TextView) findViewById(R.id.test);
 
         //화면 터치 시 발사 이벤트
@@ -42,13 +47,42 @@ public class MainPlaying extends AppCompatActivity {
                 if (player.isShootAble()) {
                     if(event.getAction() == MotionEvent.ACTION_UP){
                         loadBulletImage();
-                        player.shootBullet(curX, curY);
+
+                        if(enemyBot.isDead(player.shootBullet(curX, curY))){
+                            enemyBotImageView.setImageResource(0);
+                        };
+
                     }
                 }
                 return true;
             }
         });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //왼쪽으로 이동 버튼(구현필요)
     public void ClickLeftButton(View v) {
