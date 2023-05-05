@@ -10,37 +10,129 @@
         android:id="@+id/GameProta"
         android:layout_width="89dp"
         android:layout_height="94dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
 
+        app:layout_constraintBottom_toBottomOf="@+id/ShootTouchView"
         app:layout_constraintEnd_toEndOf="@+id/ShootTouchView"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.721"
+        app:layout_constraintStart_toStartOf="@+id/ShootTouchView"
+        app:layout_constraintTop_toTopOf="@+id/ShootTouchView"
+        app:layout_constraintVertical_bias="0.952"
         app:srcCompat="@drawable/prota_64" />
 
     <ImageView
         android:id="@+id/enemyBot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/GameProta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintBottom_toBottomOf="@+id/ShootTouchView"
+        app:layout_constraintEnd_toEndOf="@+id/ShootTouchView"
+        app:layout_constraintHorizontal_bias="0.137"
         app:layout_constraintStart_toStartOf="@+id/ShootTouchView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="@+id/ShootTouchView"
+        app:layout_constraintVertical_bias="0.951"
         app:srcCompat="@drawable/botbot" />
 
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Playing screen"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <View
+        android:id="@+id/ShootTouchView"
+        android:layout_width="match_parent"
+        android:layout_height="298dp"
+        app:layout_constraintBottom_toTopOf="@+id/UILayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.265" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:id="@+id/UILayout"
+        android:layout_width="match_parent"
+        android:layout_height="113dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/MoveLeftBtn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="12dp"
+            android:adjustViewBounds="true"
+            android:onClick="ClickLeftButton"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/moveleft" />
+
+        <ImageButton
+            android:id="@+id/MoveRightBtn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:adjustViewBounds="true"
+            android:onClick="ClickRightButton"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/moveright" />
+
+        <TextView
+            android:id="@+id/remainbullet"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="Remain\nbullet" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="421dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/bullet1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/temp_mag" />
+
+            <ImageView
+                android:id="@+id/bullet2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/temp_mag" />
+
+            <ImageView
+                android:id="@+id/bullet3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/temp_mag" />
+
+            <ImageView
+                android:id="@+id/bullet4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/temp_mag" />
+
+            <ImageView
+                android:id="@+id/bullet5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/temp_mag" />
+
+            <ImageButton
+                android:id="@+id/ReloadBtn"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="8dp"
+                android:adjustViewBounds="true"
+                android:onClick="ClickReloadButton"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/reload" />
+
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/TimeText"
@@ -53,111 +145,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.04" />
 
-    <View
-        android:id="@+id/ShootTouchView"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027" />
-
-    <ImageButton
-        android:id="@+id/MoveRightBtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="8dp"
-        android:adjustViewBounds="true"
-        android:onClick="ClickRightButton"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/MoveLeftBtn"
-        app:srcCompat="@drawable/moveright" />
-
-    <ImageButton
-        android:id="@+id/MoveLeftBtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="8dp"
-        android:adjustViewBounds="true"
-        android:onClick="ClickLeftButton"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/moveleft" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="320dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/remainbullet"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toEndOf="@+id/MoveRightBtn">
-
-        <ImageView
-            android:id="@+id/bullet1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/temp_mag" />
-
-        <ImageView
-            android:id="@+id/bullet2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/temp_mag" />
-
-        <ImageView
-            android:id="@+id/bullet3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/temp_mag" />
-
-        <ImageView
-            android:id="@+id/bullet4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/temp_mag" />
-
-        <ImageView
-            android:id="@+id/bullet5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/temp_mag" />
-
-    </LinearLayout>
-
     <TextView
-        android:id="@+id/remainbullet"
+        android:id="@+id/test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="Remain\nbullet"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ReloadBtn"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
-
-    <ImageButton
-        android:id="@+id/ReloadBtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="8dp"
-        android:adjustViewBounds="true"
-        android:onClick="ClickReloadButton"
-        android:scaleType="centerCrop"
+        android:text="Playing screen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/reload" />
+        app:layout_constraintHorizontal_bias="0.685"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
