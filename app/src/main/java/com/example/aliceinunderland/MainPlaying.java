@@ -47,8 +47,8 @@ public class MainPlaying extends AppCompatActivity {
 
                 if (player.isShootAble()) {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
-                        loadBulletImage();
                         player.shootBullet(curX, curY);
+                        loadBulletImage();
                         //총을 쏴서 적이 죽는다면 적 이미지뷰의 이미지 제거
                         if (enemyBot.isDead(enemyBotImageView, curX, curY)) {
                             enemyBotImageView.setImageResource(0);
@@ -104,8 +104,7 @@ public class MainPlaying extends AppCompatActivity {
     //재장전 버튼 추가
     public void ClickReloadButton(View v) {
         //temp_text view
-        TextView moving = (TextView) findViewById(R.id.test);
-        TextView remaining = (TextView) findViewById(R.id.remainbullet);
+
 
         ImageView[] bullet = new ImageView[5];
         //TODO:김재휘_ 총알의 이미지 표시->bullet 이미지 하나만 가지고 관리할 수는 없을까?
@@ -138,9 +137,8 @@ public class MainPlaying extends AppCompatActivity {
                 public void run() {
 
                     if (player.getRemainBullet() > 0) {
-                        bullet[j].setImageResource(R.drawable.temp_mag); //이미지
                         player.reloadBullet();
-                        remaining.setText("" + player.getRemainBullet());
+                        loadBulletImage(); //이미지
                     } else {
                         setTempText("Reload complete");
                         player.setShootAble();
@@ -158,8 +156,10 @@ public class MainPlaying extends AppCompatActivity {
 
     }
 
-    //사격 후 이미지 불러오기
+    //bullet 이미지 불러오기, remainbullet 새로고침
     public void loadBulletImage() {
+
+        TextView remaining = (TextView) findViewById(R.id.remainbullet);
 
         ImageView[] bullet = new ImageView[5];
         bullet[0] = (ImageView) findViewById(R.id.bullet1);
@@ -173,12 +173,17 @@ public class MainPlaying extends AppCompatActivity {
         switch (i) {
             case 0:
                 //player have 0 bullet -> print need to reload
+                bullet[0].setImageResource(R.drawable.temp_emptymag);
+                break;
+            case 5:
+                bullet[4].setImageResource(R.drawable.temp_mag);
+                remaining.setText("" + player.getRemainBullet());
                 break;
             //player have bullet -> invisible one bullet & remove one bullet
             default:
-
-                bullet[i - 1].setImageResource(R.drawable.temp_emptymag);
-
+                bullet[i - 1].setImageResource(R.drawable.temp_mag);
+                bullet[i].setImageResource(R.drawable.temp_emptymag);
+                remaining.setText("" + player.getRemainBullet());
                 break;
         }
 
