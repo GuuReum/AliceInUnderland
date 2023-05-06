@@ -24,8 +24,10 @@ public class PlayTimer extends CountDownTimer {
 
     @Override
     public void onFinish() { // 타이머의 시간이 0이 된다면 게임 클리어!
-        Intent intent = new Intent(mainPlayingContext, MainEnd.class);
-        mainPlayingContext.startActivity(intent);
+        ((MainPlaying) mainPlayingContext).EndPlaying();
+
+        //Intent intent = new Intent(mainPlayingContext, MainEnd.class);
+        //mainPlayingContext.startActivity(intent);
         //finish();
         /*
         TODO:finish 함수가 없어서 MainPlaying Activity가 남아있음

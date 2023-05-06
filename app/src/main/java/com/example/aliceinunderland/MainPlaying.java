@@ -1,5 +1,6 @@
 package com.example.aliceinunderland;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -57,6 +59,12 @@ public class MainPlaying extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void EndPlaying() {
+        Intent intent = new Intent(this,MainEnd.class);
+        startActivity(intent);
+        finish();
     }
 
 
