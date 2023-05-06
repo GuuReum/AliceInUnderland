@@ -17,7 +17,6 @@ public class MainPlaying extends AppCompatActivity {
     Enemy enemyBot;
 
     public TextView countdownText;
-    public TextView tempTextPrint;
 
     private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
     ImageView enemyBotImageView;
@@ -35,8 +34,6 @@ public class MainPlaying extends AppCompatActivity {
         //타이머 클래스 생성 및 타이머뷰 설정
         countdownText = findViewById(R.id.TimeText);
         playTimer.start();
-
-        tempTextPrint = (TextView) findViewById(R.id.test);
 
         //화면 터치 시 발사 이벤트
         View shootview = findViewById(R.id.ShootTouchView);
@@ -87,15 +84,13 @@ public class MainPlaying extends AppCompatActivity {
     //왼쪽으로 이동 버튼(구현필요)
     public void ClickLeftButton(View v) {
         //temp_text view
-        TextView moving = (TextView) findViewById(R.id.test);
-        moving.setText("Move to Left");
+        setTempText("Move to Left");
     }
 
     //오른쪽으로 이동 버튼(구현필요)
     public void ClickRightButton(View v) {
         //temp_text view
-        TextView moving = (TextView) findViewById(R.id.test);
-        moving.setText("Move to Right");
+        setTempText("Move to Right");
     }
 
     //재장전 버튼 추가
@@ -112,7 +107,7 @@ public class MainPlaying extends AppCompatActivity {
         bullet[3] = (ImageView) findViewById(R.id.bullet4);
         bullet[4] = (ImageView) findViewById(R.id.bullet5);
 
-        moving.setText("Reloading Magazine...");
+        setTempText("Reloading Magazine...");
 
         //재장전 전 준비
         player.makeMagEmpty();
@@ -139,13 +134,13 @@ public class MainPlaying extends AppCompatActivity {
                         player.reloadBullet();
                         remaining.setText("" + player.getRemainBullet());
                     } else {
-                        moving.setText("Reload complete");
+                        setTempText("Reload complete");
                         player.setShootAble();
                         return;
                     }
 
                     if (j == 4) {
-                        moving.setText("Reload complete");
+                        setTempText("Reload complete");
                         player.setShootAble();
                     }
                 }
@@ -179,5 +174,10 @@ public class MainPlaying extends AppCompatActivity {
                 break;
         }
 
+    }
+
+    public void setTempText(String s) {
+        TextView tempTextPrint = (TextView) findViewById(R.id.test);
+        tempTextPrint.setText(s);
     }
 }

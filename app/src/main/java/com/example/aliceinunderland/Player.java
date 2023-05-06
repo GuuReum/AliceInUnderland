@@ -19,12 +19,12 @@ public class Player {
     public void shootBullet(float shootVectorX, float shootVectorY) {
         //총알 개수가 0개라면 쓰레기 shootVector return
         if(loadedBullet == 0){
-            ((MainPlaying) mainPlayingContext).tempTextPrint.setText("Not enough ammo");
+            ((MainPlaying) mainPlayingContext).setTempText("Not enough ammo");
         }else { //총알이 있다면
             loadedBullet--; //총알 개수 감소
             shootCoolDown();
 
-            ((MainPlaying) mainPlayingContext).tempTextPrint.setText("(" + shootVectorX + "," + shootVectorY + ")");
+            ((MainPlaying) mainPlayingContext).setTempText("(" + shootVectorX + "," + shootVectorY + ")");
         }
     }
 
@@ -34,7 +34,7 @@ public class Player {
             @Override
             public void run() {
                 shootAble = true;
-                ((MainPlaying) mainPlayingContext).tempTextPrint.setText("Ready For Shoot!!");
+                ((MainPlaying) mainPlayingContext).setTempText("Ready For Shoot!!");
             }
         }, 700);
     }
