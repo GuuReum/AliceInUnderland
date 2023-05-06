@@ -45,11 +45,13 @@ public class Player {
     }
 
     //총알 재장전
-    public void reloadBullet() {
-        if ((remainBullet > 0) || (loadedBullet < 5)) {
+    public boolean reloadBullet() {
+        if ((remainBullet > 0) && (loadedBullet < 5)) {
             loadedBullet++;
             remainBullet--;
+            return true;
         }
+        return false;
     }
 
     //return 장전된 총알의 개수

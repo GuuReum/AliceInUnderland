@@ -115,27 +115,18 @@ public class MainPlaying extends AppCompatActivity {
         player.setShootDisable();
 
         reloadloop:
-        for (int i = 0; i < 5; i++) {
-
-            int j = i;
-
+        for (int i = 0; i < 6; i++) {
 
             new Handler().postDelayed(new Runnable() {  // 0.3초마다에 1탄 장전
                 @Override
                 public void run() {
 
-                    if (player.getRemainBullet() > 0) {
-                        player.reloadBullet();
+                    if (player.reloadBullet()) {
                         loadBulletImage(); //이미지
                     } else {
                         setTempText("Reload complete");
                         player.setShootAble();
                         return;
-                    }
-
-                    if (j == 4) {
-                        setTempText("Reload complete");
-                        player.setShootAble();
                     }
                 }
             }, 300 * i);
