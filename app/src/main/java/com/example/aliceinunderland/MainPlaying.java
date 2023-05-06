@@ -103,31 +103,19 @@ public class MainPlaying extends AppCompatActivity {
 
     //재장전 버튼 추가
     public void ClickReloadButton(View v) {
-        //temp_text view
-
-
-        ImageView[] bullet = new ImageView[5];
-        //TODO:김재휘_ 총알의 이미지 표시->bullet 이미지 하나만 가지고 관리할 수는 없을까?
-        bullet[0] = (ImageView) findViewById(R.id.bullet1);
-        bullet[1] = (ImageView) findViewById(R.id.bullet2);
-        bullet[2] = (ImageView) findViewById(R.id.bullet3);
-        bullet[3] = (ImageView) findViewById(R.id.bullet4);
-        bullet[4] = (ImageView) findViewById(R.id.bullet5);
 
         setTempText("Reloading Magazine...");
 
         //재장전 전 준비
         player.makeMagEmpty();
 
-        for (int i = 0; i < bullet.length; i++) {
-            bullet[i].setImageResource(R.drawable.temp_emptymag);
-        }
+        loadBulletImage();
 
         //사격 금지
         player.setShootDisable();
 
         reloadloop:
-        for (int i = 0; i < bullet.length; i++) {
+        for (int i = 0; i < 5; i++) {
 
             int j = i;
 
@@ -174,6 +162,10 @@ public class MainPlaying extends AppCompatActivity {
             case 0:
                 //player have 0 bullet -> print need to reload
                 bullet[0].setImageResource(R.drawable.temp_emptymag);
+                bullet[1].setImageResource(R.drawable.temp_emptymag);
+                bullet[2].setImageResource(R.drawable.temp_emptymag);
+                bullet[3].setImageResource(R.drawable.temp_emptymag);
+                bullet[4].setImageResource(R.drawable.temp_emptymag);
                 break;
             case 5:
                 bullet[4].setImageResource(R.drawable.temp_mag);
