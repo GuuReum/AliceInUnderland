@@ -29,23 +29,55 @@ public class Player {
     }
 
     private void shootCoolDown() {
-        shootAble = false;
+        setShootDisable();
         new Handler().postDelayed(new Runnable() {  // 0.7초뒤에 사격 가능
             @Override
             public void run() {
-                shootAble = true;
+                setShootAble();
                 ((MainPlaying) mainPlayingContext).setTempText("Ready For Shoot!!");
             }
         }, 700);
     }
 
-    public void makeMagEmpty() {
+    //재장전
+    public void doReload() {
+
+        //재장전 전 준비
+        makeMagEmpty();
+
+        ((MainPlaying) mainPlayingContext).loadBulletImage();
+
+        //사격 금지
+        setShootDisable();
+
+        reloadloop:
+        for (int i = 0; i < 6; i++) {
+
+            new Handler().postDelayed(new Runnable() {  // 0.3초마다에 1탄 장전
+                @Override
+                public void run() {
+
+                    if (insertBullet()) {
+                        ((MainPlaying) mainPlayingContext).loadBulletImage(); //이미지
+                    } else {
+                        ((MainPlaying) mainPlayingContext).setTempText("Reload complete");
+                        setShootAble();
+                        return;
+                    }
+                }
+            }, 300 * i);
+
+        }
+    }
+
+    //재장전 직전 총알 비우기
+    private void makeMagEmpty() {
         remainBullet += loadedBullet;
         loadedBullet = 0;
     }
 
-    //총알 재장전
-    public boolean reloadBullet() {
+    //총알 삽입
+    private boolean insertBullet() {
         if ((remainBullet > 0) && (loadedBullet < 5)) {
             loadedBullet++;
             remainBullet--;
@@ -70,12 +102,12 @@ public class Player {
     }
 
     //사격 가능한 상태로 전환
-    public void setShootAble(){
+    private void setShootAble(){
         shootAble = true;
     }
 
     //사격 불가능한 상태로 전환
-    public void setShootDisable(){
+    private void setShootDisable(){
         shootAble = false;
     }
 }

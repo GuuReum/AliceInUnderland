@@ -3,7 +3,6 @@ package com.example.aliceinunderland;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -61,6 +60,7 @@ public class MainPlaying extends AppCompatActivity {
         });
     }
 
+    //타이머 종료시 액티비티 종료 후 End로
     public void EndPlaying() {
         Intent intent = new Intent(this,MainEnd.class);
         startActivity(intent);
@@ -103,39 +103,11 @@ public class MainPlaying extends AppCompatActivity {
 
     //재장전 버튼 추가
     public void ClickReloadButton(View v) {
-
         setTempText("Reloading Magazine...");
-
-        //재장전 전 준비
-        player.makeMagEmpty();
-
-        loadBulletImage();
-
-        //사격 금지
-        player.setShootDisable();
-
-        reloadloop:
-        for (int i = 0; i < 6; i++) {
-
-            new Handler().postDelayed(new Runnable() {  // 0.3초마다에 1탄 장전
-                @Override
-                public void run() {
-
-                    if (player.reloadBullet()) {
-                        loadBulletImage(); //이미지
-                    } else {
-                        setTempText("Reload complete");
-                        player.setShootAble();
-                        return;
-                    }
-                }
-            }, 300 * i);
-
-        }
-
+        player.doReload();
     }
 
-    //bullet 이미지 불러오기, remainbullet 새로고침
+    //bullet 이미지 불러오기, remainbullet 수 새로고침
     public void loadBulletImage() {
 
         TextView remaining = (TextView) findViewById(R.id.remainbullet);
