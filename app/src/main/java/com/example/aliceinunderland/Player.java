@@ -1,21 +1,25 @@
 package com.example.aliceinunderland;
 
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.os.Handler;
+import android.view.View;
 
 //플레이어 클래스..
 public class Player {
-    Player(Context c) {
+    public Player(Context c, View v) {
         mainPlayingContext = c;
+        v.getLocationOnScreen(location);
     }
 
     private int loadedBullet = 5; //장전된 총알
     private int remainBullet = 10;  //여분 총알
     private boolean shootAble = true; // 사격 가능 여부
     private Context mainPlayingContext;
+    public int[] location = new int[2]; // 플레이어의 위치
 
-        //총알 한 발 사격
+    //총알 한 발 사격
     public void shootBullet(float shootVectorX, float shootVectorY) {
         //총알 개수가 0개라면 쓰레기 shootVector return
         if(loadedBullet == 0){
@@ -28,6 +32,7 @@ public class Player {
         }
     }
 
+    //사격 쿨다운
     private void shootCoolDown() {
         setShootDisable();
         new Handler().postDelayed(new Runnable() {  // 0.7초뒤에 사격 가능
@@ -37,6 +42,16 @@ public class Player {
                 ((MainPlaying) mainPlayingContext).setTempText("Ready For Shoot!!");
             }
         }, 700);
+    }
+
+    //총알 삽입
+    private boolean insertBullet() {
+        if ((remainBullet > 0) && (loadedBullet < 5)) {
+            loadedBullet++;
+            remainBullet--;
+            return true;
+        }
+        return false;
     }
 
     //재장전
@@ -74,16 +89,6 @@ public class Player {
     private void makeMagEmpty() {
         remainBullet += loadedBullet;
         loadedBullet = 0;
-    }
-
-    //총알 삽입
-    private boolean insertBullet() {
-        if ((remainBullet > 0) && (loadedBullet < 5)) {
-            loadedBullet++;
-            remainBullet--;
-            return true;
-        }
-        return false;
     }
 
     //return 장전된 총알의 개수

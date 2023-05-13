@@ -5,8 +5,13 @@ import android.view.View;
 
 public class Enemy {
     private boolean isAlive = true; // 적의 생존 여부
-    private Context mainPlayingContext;
+    private int[] location = new int[2]; // 적의 위치
 
+    public Enemy(View view){
+        view.getLocationOnScreen(location);
+    }
+
+    //적이 파괴되었는지 확인
     public boolean isDead(View v, float curX, float curY) {
         if (isAlive) {
             //if botbot을 터치했다면
@@ -21,7 +26,6 @@ public class Enemy {
 
     //터치했는지 확인
     public boolean isTouchInside(View v, float x, float y) {
-        int[] location = new int[2];
         v.getLocationOnScreen(location);
 
         final int realRight = location[0] + v.getWidth();

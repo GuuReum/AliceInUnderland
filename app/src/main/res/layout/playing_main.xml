@@ -58,7 +58,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="12dp"
             android:adjustViewBounds="true"
-            android:onClick="ClickLeftButton"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/moveleft" />
 
@@ -68,7 +67,6 @@
             android:layout_height="100dp"
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
-            android:onClick="ClickRightButton"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/moveright" />
 
@@ -161,5 +159,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.04" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.504" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

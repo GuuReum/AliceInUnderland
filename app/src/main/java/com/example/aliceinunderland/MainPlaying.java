@@ -1,11 +1,16 @@
 package com.example.aliceinunderland;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -14,13 +19,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 //게임 중 화면
 public class MainPlaying extends AppCompatActivity {
-    private Player player = new Player(this);
-    Enemy enemyBot;
-
     public TextView countdownText;
 
     private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
-    ImageView enemyBotImageView;
+
+    private Enemy enemyBot;
+    private ImageView enemyBotImageView;
+
+    private Player player;
+    private ImageView playerImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +35,13 @@ public class MainPlaying extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playing_main);
 
-        //적 이미지뷰와 class를 만들어주고, 적의 좌표값과 사이즈 설정
+        //주인공 이미지뷰, class 설정
+        playerImageView = (ImageView)findViewById(R.id.GameProta);
+        player = new Player(this, playerImageView);
+
+        //적 이미지뷰와 class 설정
         enemyBotImageView = (ImageView) findViewById(R.id.enemyBot);
-        enemyBot = new Enemy();
+        enemyBot = new Enemy(enemyBotImageView);
 
         //타이머 클래스 생성 및 타이머뷰 설정
         countdownText = findViewById(R.id.TimeText);
@@ -65,40 +76,6 @@ public class MainPlaying extends AppCompatActivity {
         Intent intent = new Intent(this,MainEnd.class);
         startActivity(intent);
         finish();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //왼쪽으로 이동 버튼(구현필요)
-    public void ClickLeftButton(View v) {
-        //temp_text view
-        setTempText("Move to Left");
-    }
-
-    //오른쪽으로 이동 버튼(구현필요)
-    public void ClickRightButton(View v) {
-        //temp_text view
-        setTempText("Move to Right");
     }
 
     //재장전 버튼 추가
@@ -148,4 +125,5 @@ public class MainPlaying extends AppCompatActivity {
         TextView tempTextPrint = (TextView) findViewById(R.id.test);
         tempTextPrint.setText(s);
     }
+
 }
