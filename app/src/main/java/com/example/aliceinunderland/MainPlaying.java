@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
@@ -29,6 +30,9 @@ public class MainPlaying extends AppCompatActivity {
     private Player player;
     private ImageView playerImageView;
 
+    private ImageView leftBtn;
+    private ImageView RightBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -46,7 +50,25 @@ public class MainPlaying extends AppCompatActivity {
         //타이머 클래스 생성 및 타이머뷰 설정
         countdownText = findViewById(R.id.TimeText);
         playTimer.start();
+////////////////////////////////////////////////////////////TODO:수정할거임
+        leftBtn = (ImageView)findViewById(R.id.MoveLeftBtn);
+        leftBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                playerImageView.setX(playerImageView.getX() - 5);
+                return true;
+            }
+        });
 
+        RightBtn = (ImageView)findViewById(R.id.MoveRightBtn);
+        RightBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                playerImageView.setX(playerImageView.getX() + 5);
+                return true;
+            }
+        });
+//////////////////////////////////////////////////////////
         //화면 터치 시 발사 이벤트
         View shootview = findViewById(R.id.ShootTouchView);
         shootview.setOnTouchListener(new View.OnTouchListener() {
