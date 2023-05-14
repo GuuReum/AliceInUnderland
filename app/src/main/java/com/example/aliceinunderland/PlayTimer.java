@@ -18,7 +18,9 @@ public class PlayTimer extends CountDownTimer {
     @Override
     public void onTick(long time) { // coolDownTime마다 시간을 갱신해서 Timer 텍스트뷰에 표시해줌
         remainTime = time;
-        txt = ((int) remainTime % 3600000 / 60000) + ":" + ((int) remainTime % 3600000 % 60000 / 1000);
+        int remainmin = (int) remainTime % 3600000 / 60000;
+        int remainsec = (int) remainTime % 3600000 % 60000 / 1000;
+        txt = remainmin + ":" + remainsec;
         ((MainPlaying) mainPlayingContext).countdownText.setText(txt);
     }
 

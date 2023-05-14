@@ -25,6 +25,7 @@ public class MainPlaying extends AppCompatActivity {
     private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
 
     private Enemy enemyBot;
+    private EnemyWave Wave;
     private ImageView enemyBotImageView;
 
     private Player player;
