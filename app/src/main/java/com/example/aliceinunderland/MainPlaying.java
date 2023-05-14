@@ -79,12 +79,12 @@ public class MainPlaying extends AppCompatActivity {
 
                 if (player.isShootAble()) {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
-                        player.shootBullet(curX, curY);
-                        loadBulletImage();
                         //총을 쏴서 적이 죽는다면 적 이미지뷰의 이미지 제거
-                        if (enemyBot.isDead(enemyBotImageView, curX, curY)) {
+                        if (enemyBot.isDead(enemyBotImageView, curX, curY) && player.getLoadedBullet() > 0) {
                             enemyBotImageView.setImageResource(0);
                         }
+                        player.shootBullet(curX, curY);
+                        loadBulletImage();
                     }
                     return true;
                 }
