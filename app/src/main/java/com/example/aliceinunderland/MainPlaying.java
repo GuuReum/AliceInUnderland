@@ -123,20 +123,20 @@ public class MainPlaying extends AppCompatActivity {
         switch (i) {
             case 0:
                 //player have 0 bullet -> print need to reload
-                bullet[0].setImageResource(R.drawable.temp_emptymag);
-                bullet[1].setImageResource(R.drawable.temp_emptymag);
-                bullet[2].setImageResource(R.drawable.temp_emptymag);
-                bullet[3].setImageResource(R.drawable.temp_emptymag);
-                bullet[4].setImageResource(R.drawable.temp_emptymag);
+                bullet[0].setImageResource(R.drawable.emptymag);
+                bullet[1].setImageResource(R.drawable.emptymag);
+                bullet[2].setImageResource(R.drawable.emptymag);
+                bullet[3].setImageResource(R.drawable.emptymag);
+                bullet[4].setImageResource(R.drawable.emptymag);
                 break;
             case 5:
-                bullet[4].setImageResource(R.drawable.temp_mag);
+                bullet[4].setImageResource(R.drawable.mag);
                 remaining.setText("" + player.getRemainBullet());
                 break;
             //player have bullet -> invisible one bullet & remove one bullet
             default:
-                bullet[i - 1].setImageResource(R.drawable.temp_mag);
-                bullet[i].setImageResource(R.drawable.temp_emptymag);
+                bullet[i - 1].setImageResource(R.drawable.mag);
+                bullet[i].setImageResource(R.drawable.emptymag);
                 remaining.setText("" + player.getRemainBullet());
                 break;
         }

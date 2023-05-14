@@ -82,35 +82,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/temp_mag" />
+                app:srcCompat="@drawable/mag" />
 
             <ImageView
                 android:id="@+id/bullet2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/temp_mag" />
+                app:srcCompat="@drawable/mag" />
 
             <ImageView
                 android:id="@+id/bullet3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/temp_mag" />
+                app:srcCompat="@drawable/mag" />
 
             <ImageView
                 android:id="@+id/bullet4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/temp_mag" />
+                app:srcCompat="@drawable/mag" />
 
             <ImageView
                 android:id="@+id/bullet5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/temp_mag" />
+                app:srcCompat="@drawable/mag" />
 
             <ImageButton
                 android:id="@+id/ReloadBtn"
