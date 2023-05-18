@@ -1,7 +1,6 @@
 package com.example.aliceinunderland;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.CountDownTimer;
 
 //타이머 클래스..

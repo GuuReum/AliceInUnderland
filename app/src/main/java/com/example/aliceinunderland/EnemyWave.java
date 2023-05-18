@@ -2,6 +2,8 @@ package com.example.aliceinunderland;
 
 import android.content.Context;
 
+import java.util.Random;
+
 
 public class EnemyWave {
     public EnemyWave(Context mainPlayingContext) {
@@ -20,7 +22,8 @@ public class EnemyWave {
     }
 
     public int getEnemyLocation() {
-        location = 300;
+        Random random = new Random();
+        location = (int) random.nextInt(500) + 50;
         return location;
     }
 
