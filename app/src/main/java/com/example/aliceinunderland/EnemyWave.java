@@ -9,4 +9,20 @@ public class EnemyWave {
     }
     private final Context mainPlayingContext;
 
+    private int EnemyNum = 2;  //적 스폰 수
+    private int location;  //적 위치
+
+
+
+
+    public int getEnemyNum() {
+        return EnemyNum;
+    }
+
+    public int getEnemyLocation() {
+        location = 300;
+        return location;
+    }
+
+
 }

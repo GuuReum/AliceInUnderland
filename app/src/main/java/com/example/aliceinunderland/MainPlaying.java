@@ -17,6 +17,8 @@ import android.widget.TextView;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 
 //게임 중 화면
 public class MainPlaying extends AppCompatActivity {
@@ -24,8 +26,8 @@ public class MainPlaying extends AppCompatActivity {
 
     private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
 
-    private Enemy enemyBot;
-    private EnemyWave Wave;
+    private ArrayList<Enemy> enemyBot = new ArrayList<>();
+    private EnemyWave Wave = new EnemyWave(this);
     private ImageView enemyBotImageView;
 
     private Player player;
@@ -45,8 +47,10 @@ public class MainPlaying extends AppCompatActivity {
         player = new Player(this, playerImageView);
 
         //적 이미지뷰와 class 설정
+        //TODO:enemy 추가를 위해서는 동적으로 view를 추가해야하는데 힘들지도... 그냥 Enemy sprite는 bitmap으로 바꾸는것도 괜찮을지도? (강의노트 6)
         enemyBotImageView = (ImageView) findViewById(R.id.enemyBot);
-        enemyBot = new Enemy(enemyBotImageView);
+
+        enemyBot.add(new Enemy(enemyBotImageView, Wave.getEnemyLocation()));
 
         //타이머 클래스 생성 및 타이머뷰 설정
         countdownText = findViewById(R.id.TimeText);
@@ -80,9 +84,13 @@ public class MainPlaying extends AppCompatActivity {
 
                 if (player.isShootAble()) {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
-                        //총을 쏴서 적이 죽는다면 적 이미지뷰의 이미지 제거
-                        if (enemyBot.isDead(enemyBotImageView, curX, curY) && player.getLoadedBullet() > 0) {
-                            enemyBotImageView.setImageResource(0);
+
+                        for (int i=0; i<enemyBot.size(); i++) {
+                            //총을 쏴서 적이 죽는다면 적 이미지뷰의 이미지 제거, 배열에서 제거
+                            if (enemyBot.get(0).isDead(enemyBotImageView, curX, curY) && player.getLoadedBullet() > 0) {
+                                enemyBotImageView.setImageResource(0);
+                                enemyBot.remove(i);
+                            }
                         }
                         player.shootBullet(curX, curY);
                         loadBulletImage();

@@ -7,7 +7,9 @@ public class Enemy {
     private boolean isAlive = true; // 적의 생존 여부
     private int[] location = new int[2]; // 적의 위치
 
-    public Enemy(View view){
+    public Enemy(View view, int l){
+        setLocation(l);
+        view.setTranslationX(l);
         view.getLocationOnScreen(location);
     }
 
@@ -33,5 +35,9 @@ public class Enemy {
         boolean result = ((x >= location[0]) && x <= realRight) && ((y >= location[1]) && (y <= realBottom));
 
         return result;
+    }
+
+    public void setLocation(int l){
+        location[0] = l;
     }
 }
