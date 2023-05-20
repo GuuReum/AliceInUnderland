@@ -21,6 +21,8 @@ public class PlayTimer extends CountDownTimer {
         int remainsec = (int) remainTime % 3600000 % 60000 / 1000;
         txt = remainmin + ":" + remainsec;
         ((MainPlaying) mainPlayingContext).countdownText.setText(txt);
+
+        if (remainsec == 59) {((MainPlaying) mainPlayingContext).StartWave();}
     }
 
     @Override

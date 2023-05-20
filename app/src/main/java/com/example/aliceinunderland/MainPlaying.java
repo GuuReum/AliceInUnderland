@@ -50,8 +50,6 @@ public class MainPlaying extends AppCompatActivity {
         playerImageView = (ImageView)findViewById(R.id.GameProta);
         player = new Player(this, playerImageView);
 
-        for (int i = 0; i < Wave.getEnemyNum(); i++) {spawnEnemy();}
-
         //타이머 클래스 생성 및 타이머뷰 설정
         countdownText = findViewById(R.id.TimeText);
         playTimer.start();
@@ -90,6 +88,7 @@ public class MainPlaying extends AppCompatActivity {
                             if (enemyBot.get(i).isDead(enemyBotImageView.get(i), curX, curY) && player.getLoadedBullet() > 0) {
                                 enemyBotImageView.remove(i);
                                 enemyBot.remove(i);
+                                Wave.removelocation(i);
                             }
                         }
                         player.shootBullet(curX, curY);
@@ -157,7 +156,7 @@ public class MainPlaying extends AppCompatActivity {
         tempTextPrint.setText(s);
     }
 
-    public void spawnEnemy() {
+    private void spawnEnemy() {
         //적 이미지뷰와 class 설정
         //TODO:enemy dead 시 이미지 삭제가 안됨... 그냥 Enemy sprite는 bitmap으로 바꾸는것도 괜찮을지도? (강의노트 6)
         //enemyBotImageView = (ImageView) findViewById(R.id.enemyBot);
@@ -172,6 +171,16 @@ public class MainPlaying extends AppCompatActivity {
         enemyBotImageView.add(imageview);
 
         enemyBot.add(new Enemy(enemyBotImageView.get(enemyBotImageView.size()-1), Wave.getEnemyLocation()));
+    }
+
+    public void StartWave() {
+        for (int i = 0; i < Wave.getEnemyNum(); i++) {spawnEnemy();}
+        Wave.randEnemyNum();
+    }
+
+    public void tempClickStartWaveButton(View v) {
+        for (int i = 0; i < Wave.getEnemyNum(); i++) {spawnEnemy();}
+        Wave.randEnemyNum();
     }
 
 }
