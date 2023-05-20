@@ -1,23 +1,17 @@
 package com.example.aliceinunderland;
 
-import android.animation.ObjectAnimator;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.media.Image;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -30,9 +24,9 @@ public class MainPlaying extends AppCompatActivity {
 
     private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
 
-    public ArrayList<Enemy> enemyBot = new ArrayList<>();
-    public ArrayList<ImageView> enemyBotImageView = new ArrayList<>();
-    public EnemyWave Wave = new EnemyWave(this);
+    private ArrayList<Enemy> enemyBot = new ArrayList<>();
+    private ArrayList<ImageView> enemyBotImageView = new ArrayList<>();
+    private EnemyWave Wave = new EnemyWave(this);
 
     private Player player;
     private ImageView playerImageView;
@@ -83,12 +77,15 @@ public class MainPlaying extends AppCompatActivity {
                 if (player.isShootAble()) {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
 
-                        for (int i=0; i<enemyBot.size(); i++) {
+                        for (int i = 0; i< enemyBot.size(); i++) {
                             //총을 쏴서 적이 죽는다면 적 이미지뷰의 이미지 제거, 배열에서 제거
                             if (enemyBot.get(i).isDead(enemyBotImageView.get(i), curX, curY) && player.getLoadedBullet() > 0) {
+                                removeEnemy(enemyBotImageView.get(i).getId());
                                 enemyBotImageView.remove(i);
                                 enemyBot.remove(i);
                                 Wave.removelocation(i);
+
+                                break; //한마리만 사격
                             }
                         }
                         player.shootBullet(curX, curY);
@@ -156,21 +153,32 @@ public class MainPlaying extends AppCompatActivity {
         tempTextPrint.setText(s);
     }
 
-    private void spawnEnemy() {
+    private void spawnEnemy() {  //적 생성 및 이미지뷰 동적생성 함수
         //적 이미지뷰와 class 설정
-        //TODO:enemy dead 시 이미지 삭제가 안됨... 그냥 Enemy sprite는 bitmap으로 바꾸는것도 괜찮을지도? (강의노트 6)
+        //TODO:그냥 Enemy sprite는 bitmap으로 바꾸는것도 괜찮을지도? (강의노트 6)
         //enemyBotImageView = (ImageView) findViewById(R.id.enemyBot);
 
+        //이미지뷰 동적 생성
         ConstraintLayout layout = findViewById(R.id.te);
-        ImageView imageview = new ImageView(this);
-        imageview.setImageResource(R.drawable.botbot);
-        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        imageview.setLayoutParams(param);
-        layout.addView(imageview,2);
 
+        int num = enemyBot.size();
+
+        ImageView imageview = new ImageView(this); //빈 이미지뷰 생성
         enemyBotImageView.add(imageview);
 
-        enemyBot.add(new Enemy(enemyBotImageView.get(enemyBotImageView.size()-1), Wave.getEnemyLocation()));
+        enemyBotImageView.get(num).setImageResource(R.drawable.botbot);
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        enemyBotImageView.get(num).setLayoutParams(param);
+        layout.addView(enemyBotImageView.get(num),2);
+        enemyBotImageView.get(num).setId(80500 + num); //id 부여 (이미지뷰 삭제할 때 필요)
+
+        enemyBot.add(new Enemy(enemyBotImageView.get(num), Wave.getEnemyLocation()));
+    }
+
+    private void removeEnemy(int id) { //적 이미지뷰 삭제 함수
+        ConstraintLayout layout = findViewById(R.id.te);
+        ImageView imageview = findViewById(id);
+        layout.removeView(imageview);
     }
 
     public void StartWave() {
@@ -181,6 +189,26 @@ public class MainPlaying extends AppCompatActivity {
     public void tempClickStartWaveButton(View v) {
         for (int i = 0; i < Wave.getEnemyNum(); i++) {spawnEnemy();}
         Wave.randEnemyNum();
+    }
+
+
+    //TODO: 뒤로가기 누를시 선택창 뜨게. custom dialog로 만들면 될 듯? (강의노트 7)
+    @Override
+    public void onBackPressed() {   // 뒤로가기 누르면 다이얼로그 생성
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("메인으로 나가시겠습니까?"); // 다이얼로그 제목
+        builder.setNegativeButton("게임 계속하기", new AlertDialog.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setPositiveButton("메인으로", new AlertDialog.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                MainPlaying.super.onBackPressed();
+            }
+        });
+
+        builder.show(); // 다이얼로그 보이기
     }
 
 }

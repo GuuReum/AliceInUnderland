@@ -22,7 +22,9 @@ public class PlayTimer extends CountDownTimer {
         txt = remainmin + ":" + remainsec;
         ((MainPlaying) mainPlayingContext).countdownText.setText(txt);
 
-        if (remainsec == 59) {((MainPlaying) mainPlayingContext).StartWave();}
+        if (remainsec == 59) {
+            ((MainPlaying) mainPlayingContext).StartWave();
+        }
     }
 
     @Override
