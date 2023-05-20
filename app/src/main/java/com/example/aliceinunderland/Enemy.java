@@ -9,7 +9,8 @@ public class Enemy {
 
     public Enemy(View view, int l){
         setLocation(l);
-        view.setTranslationX(l);
+        view.setTranslationX(location[0]);
+        view.setTranslationY(location[1]);
         view.getLocationOnScreen(location);
     }
 
@@ -39,5 +40,6 @@ public class Enemy {
 
     public void setLocation(int l){
         location[0] = l;
+        location[1] = 475;
     }
 }

@@ -6,16 +6,20 @@ import android.content.pm.ActivityInfo;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
 
@@ -26,9 +30,9 @@ public class MainPlaying extends AppCompatActivity {
 
     private PlayTimer playTimer = new PlayTimer(900000, 1000, this);
 
-    private ArrayList<Enemy> enemyBot = new ArrayList<>();
-    private EnemyWave Wave = new EnemyWave(this);
-    private ImageView enemyBotImageView;
+    public ArrayList<Enemy> enemyBot = new ArrayList<>();
+    public ArrayList<ImageView> enemyBotImageView = new ArrayList<>();
+    public EnemyWave Wave = new EnemyWave(this);
 
     private Player player;
     private ImageView playerImageView;
@@ -46,11 +50,7 @@ public class MainPlaying extends AppCompatActivity {
         playerImageView = (ImageView)findViewById(R.id.GameProta);
         player = new Player(this, playerImageView);
 
-        //적 이미지뷰와 class 설정
-        //TODO:enemy 추가를 위해서는 동적으로 view를 추가해야하는데 힘들지도... 그냥 Enemy sprite는 bitmap으로 바꾸는것도 괜찮을지도? (강의노트 6)
-        enemyBotImageView = (ImageView) findViewById(R.id.enemyBot);
-
-        enemyBot.add(new Enemy(enemyBotImageView, Wave.getEnemyLocation()));
+        for (int i = 0; i < Wave.getEnemyNum(); i++) {spawnEnemy();}
 
         //타이머 클래스 생성 및 타이머뷰 설정
         countdownText = findViewById(R.id.TimeText);
@@ -87,8 +87,8 @@ public class MainPlaying extends AppCompatActivity {
 
                         for (int i=0; i<enemyBot.size(); i++) {
                             //총을 쏴서 적이 죽는다면 적 이미지뷰의 이미지 제거, 배열에서 제거
-                            if (enemyBot.get(0).isDead(enemyBotImageView, curX, curY) && player.getLoadedBullet() > 0) {
-                                enemyBotImageView.setImageResource(0);
+                            if (enemyBot.get(i).isDead(enemyBotImageView.get(i), curX, curY) && player.getLoadedBullet() > 0) {
+                                enemyBotImageView.remove(i);
                                 enemyBot.remove(i);
                             }
                         }
@@ -155,6 +155,23 @@ public class MainPlaying extends AppCompatActivity {
     public void setTempText(String s) {
         TextView tempTextPrint = (TextView) findViewById(R.id.test);
         tempTextPrint.setText(s);
+    }
+
+    public void spawnEnemy() {
+        //적 이미지뷰와 class 설정
+        //TODO:enemy dead 시 이미지 삭제가 안됨... 그냥 Enemy sprite는 bitmap으로 바꾸는것도 괜찮을지도? (강의노트 6)
+        //enemyBotImageView = (ImageView) findViewById(R.id.enemyBot);
+
+        ConstraintLayout layout = findViewById(R.id.te);
+        ImageView imageview = new ImageView(this);
+        imageview.setImageResource(R.drawable.botbot);
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        imageview.setLayoutParams(param);
+        layout.addView(imageview,2);
+
+        enemyBotImageView.add(imageview);
+
+        enemyBot.add(new Enemy(enemyBotImageView.get(enemyBotImageView.size()-1), Wave.getEnemyLocation()));
     }
 
 }

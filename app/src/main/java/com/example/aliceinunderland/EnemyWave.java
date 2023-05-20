@@ -21,6 +21,11 @@ public class EnemyWave {
         return EnemyNum;
     }
 
+    private void randEnemyNum() {
+        Random random = new Random();
+        EnemyNum = (int) random.nextInt(500) + 50;
+    }
+
     public int getEnemyLocation() {
         Random random = new Random();
         location = (int) random.nextInt(500) + 50;
