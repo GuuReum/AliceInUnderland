@@ -26,22 +26,18 @@ public class Player {
             ((MainPlaying) mainPlayingContext).setTempText("Not enough ammo");
         }else { //총알이 있다면
             loadedBullet--; //총알 개수 감소
-            shootCoolDown();
+            setShootDisable();
 
-            ((MainPlaying) mainPlayingContext).setTempText("(" + shootVectorX + "," + shootVectorY + ")");
-        }
-    }
-
-    //사격 쿨다운
-    private void shootCoolDown() {
-        setShootDisable();
-        new Handler().postDelayed(new Runnable() {  // 0.7초뒤에 사격 가능
+            new Handler().postDelayed(new Runnable() {  // 0.7초뒤에 사격 가능
             @Override
             public void run() {
                 setShootAble();
                 ((MainPlaying) mainPlayingContext).setTempText("Ready For Shoot!!");
             }
         }, 700);
+
+            ((MainPlaying) mainPlayingContext).setTempText("(" + shootVectorX + "," + shootVectorY + ")");
+        }
     }
 
     //총알 삽입
@@ -58,7 +54,8 @@ public class Player {
     public void doReload() {
 
         //재장전 전 준비
-        makeMagEmpty();
+        remainBullet += loadedBullet;
+        loadedBullet = 0;
 
         ((MainPlaying) mainPlayingContext).loadBulletImage();
 
@@ -83,12 +80,6 @@ public class Player {
             }, 300 * i);
 
         }
-    }
-
-    //재장전 직전 총알 비우기
-    private void makeMagEmpty() {
-        remainBullet += loadedBullet;
-        loadedBullet = 0;
     }
 
     //return 장전된 총알의 개수

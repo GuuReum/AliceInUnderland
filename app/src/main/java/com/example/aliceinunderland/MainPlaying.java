@@ -47,7 +47,7 @@ public class MainPlaying extends AppCompatActivity {
         //타이머 클래스 생성 및 타이머뷰 설정
         countdownText = findViewById(R.id.TimeText);
         playTimer.start();
-////////////////////////////////////////////////////////////TODO:수정할거임
+
         leftBtn = (ImageView)findViewById(R.id.MoveLeftBtn);
         leftBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -65,7 +65,7 @@ public class MainPlaying extends AppCompatActivity {
                 return true;
             }
         });
-//////////////////////////////////////////////////////////
+
         //화면 터치 시 발사 이벤트
         View shootview = findViewById(R.id.ShootTouchView);
         shootview.setOnTouchListener(new View.OnTouchListener() {
@@ -155,7 +155,7 @@ public class MainPlaying extends AppCompatActivity {
 
     private void spawnEnemy() {  //적 생성 및 이미지뷰 동적생성 함수
         //적 이미지뷰와 class 설정
-        //TODO:그냥 Enemy sprite는 bitmap으로 바꾸는것도 괜찮을지도? (강의노트 6)
+        //TODO:그냥 Enemy sprite는 bitmap으로 바꾸는것도 괜찮을지도? (강의노트 6) - ok, 김재휘
         //enemyBotImageView = (ImageView) findViewById(R.id.enemyBot);
 
         //이미지뷰 동적 생성
@@ -166,7 +166,7 @@ public class MainPlaying extends AppCompatActivity {
         ImageView imageview = new ImageView(this); //빈 이미지뷰 생성
         enemyBotImageView.add(imageview);
 
-        enemyBotImageView.get(num).setImageResource(R.drawable.botbot);
+        enemyBotImageView.get(num).setImageResource(R.drawable.enemy300);
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         enemyBotImageView.get(num).setLayoutParams(param);
         layout.addView(enemyBotImageView.get(num),2);

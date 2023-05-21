@@ -6,19 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/GameProta"
-        android:layout_width="89dp"
-        android:layout_height="94dp"
-
-        app:layout_constraintBottom_toBottomOf="@+id/ShootTouchView"
-        app:layout_constraintEnd_toEndOf="@+id/ShootTouchView"
-        app:layout_constraintHorizontal_bias="0.721"
-        app:layout_constraintStart_toStartOf="@+id/ShootTouchView"
-        app:layout_constraintTop_toTopOf="@+id/ShootTouchView"
-        app:layout_constraintVertical_bias="0.952"
-        app:srcCompat="@drawable/prota_64" />
-<!--
+    <!--
     <ImageView
         android:id="@+id/enemyBot"
         android:layout_width="wrap_content"
@@ -31,10 +19,12 @@
         app:layout_constraintVertical_bias="0.952"
         app:srcCompat="@drawable/botbot" />
 -->
+
     <View
         android:id="@+id/ShootTouchView"
-        android:layout_width="728dp"
-        android:layout_height="286dp"
+        android:layout_width="match_parent"
+        android:layout_height="282dp"
+        android:background="@drawable/background_street"
         app:layout_constraintBottom_toTopOf="@+id/UILayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -42,13 +32,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+        android:id="@+id/GameProta"
+        android:layout_width="89dp"
+        android:layout_height="94dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/ShootTouchView"
+        app:layout_constraintEnd_toEndOf="@+id/ShootTouchView"
+        app:layout_constraintHorizontal_bias="0.725"
+        app:layout_constraintStart_toStartOf="@+id/ShootTouchView"
+        app:layout_constraintTop_toTopOf="@+id/ShootTouchView"
+        app:layout_constraintVertical_bias="0.978"
+        app:srcCompat="@drawable/prota" />
+
     <LinearLayout
         android:id="@+id/UILayout"
         android:layout_width="match_parent"
-        android:layout_height="113dp"
+        android:layout_height="110dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
@@ -57,24 +61,29 @@
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="12dp"
+            android:layout_weight="0.8"
             android:adjustViewBounds="true"
+            android:background="@drawable/moveleftbutton"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/moveleft" />
+            android:src="@drawable/moveleftbutton" />
 
         <ImageButton
             android:id="@+id/MoveRightBtn"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginBottom="8dp"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
+            android:background="@drawable/moveleftbutton"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/moveright" />
+            android:src="@drawable/moverightbutton" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="421dp"
+            android:layout_width="325dp"
             android:layout_height="100dp"
             android:layout_marginBottom="8dp"
+            android:layout_weight="0.5"
             android:orientation="horizontal">
 
             <ImageView
@@ -112,17 +121,20 @@
                 android:layout_weight="1"
                 app:srcCompat="@drawable/mag" />
 
-            <ImageButton
-                android:id="@+id/ReloadBtn"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginBottom="8dp"
-                android:adjustViewBounds="true"
-                android:onClick="ClickReloadButton"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/reload" />
-
         </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/ReloadBtn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@drawable/reloadbutton"
+            android:onClick="ClickReloadButton"
+            android:scaleType="centerCrop"
+            android:src="@drawable/reloadbutton" />
+
     </LinearLayout>
 
     <TextView
@@ -130,6 +142,7 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:text="10"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.095"
@@ -141,7 +154,10 @@
         android:id="@+id/TimeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/dunggeunmo"
         android:text="15:00"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,6 +169,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Playing screen"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.685"
