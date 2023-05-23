@@ -76,16 +76,17 @@ public class MainPlaying extends AppCompatActivity {
 
                 if (player.isShootAble()) {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
+                        if (player.getLoadedBullet() > 0) {
+                            for (int i = 0; i < enemyBot.size(); i++) {
+                                //총을 쏴서 적이 죽는다면 적 이미지뷰의 이미지 제거, 배열에서 제거
+                                if (enemyBot.get(i).isDead(enemyBotImageView.get(i), curX, curY)) {
+                                    removeEnemy(enemyBotImageView.get(i).getId());
+                                    enemyBotImageView.remove(i);
+                                    enemyBot.remove(i);
+                                    Wave.removelocation(i);
 
-                        for (int i = 0; i< enemyBot.size(); i++) {
-                            //총을 쏴서 적이 죽는다면 적 이미지뷰의 이미지 제거, 배열에서 제거
-                            if (enemyBot.get(i).isDead(enemyBotImageView.get(i), curX, curY) && player.getLoadedBullet() > 0) {
-                                removeEnemy(enemyBotImageView.get(i).getId());
-                                enemyBotImageView.remove(i);
-                                enemyBot.remove(i);
-                                Wave.removelocation(i);
-
-                                break; //한마리만 사격
+                                    break; //한마리만 사격
+                                }
                             }
                         }
                         player.shootBullet(curX, curY);
@@ -164,15 +165,17 @@ public class MainPlaying extends AppCompatActivity {
         int num = enemyBot.size();
 
         ImageView imageview = new ImageView(this); //빈 이미지뷰 생성
-        enemyBotImageView.add(imageview);
 
-        enemyBotImageView.get(num).setImageResource(R.drawable.enemy300);
+
+        imageview.setImageResource(R.drawable.enemy300);
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        enemyBotImageView.get(num).setLayoutParams(param);
+        imageview.setLayoutParams(param);
+
+
+        enemyBotImageView.add(imageview);
+        enemyBot.add(new Enemy(enemyBotImageView.get(num), Wave.getEnemyLocation()));
         layout.addView(enemyBotImageView.get(num),2);
         enemyBotImageView.get(num).setId(80500 + num); //id 부여 (이미지뷰 삭제할 때 필요)
-
-        enemyBot.add(new Enemy(enemyBotImageView.get(num), Wave.getEnemyLocation()));
     }
 
     private void removeEnemy(int id) { //적 이미지뷰 삭제 함수

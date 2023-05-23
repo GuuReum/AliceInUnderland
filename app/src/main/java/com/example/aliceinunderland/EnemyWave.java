@@ -30,7 +30,7 @@ public class EnemyWave {
         Random random = new Random();
         location = (int) random.nextInt(500) + 50;
         for (int l : locationlist) {
-            if (location < l + 20 || location > l - 20) {
+            if (location < l + 50 || location > l - 50) {
                 location = (int) random.nextInt(500) + 50;
             }
         }

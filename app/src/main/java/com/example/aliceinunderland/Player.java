@@ -14,7 +14,7 @@ public class Player {
     }
 
     private int loadedBullet = 5; //장전된 총알
-    private int remainBullet = 10;  //여분 총알
+    private int remainBullet = 100;  //여분 총알
     private boolean shootAble = true; // 사격 가능 여부
     private Context mainPlayingContext;
     public int[] location = new int[2]; // 플레이어의 위치
