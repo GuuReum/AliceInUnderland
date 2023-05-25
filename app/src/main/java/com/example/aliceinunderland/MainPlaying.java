@@ -108,8 +108,10 @@ public class MainPlaying extends AppCompatActivity {
 
     //재장전 버튼 추가
     public void ClickReloadButton(View v) {
-        setTempText("Reloading Magazine...");
-        player.doReload();
+        if (player.isReloadAble()) {
+            setTempText("Reloading Magazine...");
+            player.doReload();
+        }
     }
 
     //bullet 이미지 불러오기, remainbullet 수 새로고침

@@ -16,6 +16,7 @@ public class Player {
     private int loadedBullet = 5; //장전된 총알
     private int remainBullet = 100;  //여분 총알
     private boolean shootAble = true; // 사격 가능 여부
+    private boolean reloadAble = true; // 재장전 가능 여부
     private Context mainPlayingContext;
     public int[] location = new int[2]; // 플레이어의 위치
 
@@ -53,6 +54,8 @@ public class Player {
     //재장전
     public void doReload() {
 
+        setReloadDisable();
+
         //재장전 전 준비
         remainBullet += loadedBullet;
         loadedBullet = 0;
@@ -73,6 +76,7 @@ public class Player {
                         ((MainPlaying) mainPlayingContext).loadBulletImage(); //이미지
                     } else {
                         ((MainPlaying) mainPlayingContext).setTempText("Reload complete");
+                        setReloadAble();
                         setShootAble();
                         return;
                     }
@@ -105,5 +109,18 @@ public class Player {
     //사격 불가능한 상태로 전환
     private void setShootDisable(){
         shootAble = false;
+    }
+
+    //return 재장전 가능 여부
+    public boolean isReloadAble() {return reloadAble;}
+
+    //재장전 가능한 상태로 전환
+    private void setReloadAble(){
+        reloadAble = true;
+    }
+
+    //재장전 불가능한 상태로 전환
+    private void setReloadDisable(){
+        reloadAble = false;
     }
 }

@@ -19,10 +19,11 @@ public class PlayTimer extends CountDownTimer {
         remainTime = time;
         int remainmin = (int) remainTime % 3600000 / 60000;
         int remainsec = (int) remainTime % 3600000 % 60000 / 1000;
+        int wavesec = (int) remainTime / 1000 % 10;
         txt = remainmin + ":" + remainsec;
         ((MainPlaying) mainPlayingContext).countdownText.setText(txt);
 
-        if (remainsec == 59) {
+        if (wavesec == 9) {
             ((MainPlaying) mainPlayingContext).StartWave();
         }
     }

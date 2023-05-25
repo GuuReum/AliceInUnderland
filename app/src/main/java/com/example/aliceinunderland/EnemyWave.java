@@ -23,7 +23,7 @@ public class EnemyWave {
 
     public void randEnemyNum() { //다음 웨이브 때 소환되는 적 수 정하기 (랜덤)
         Random random = new Random();
-        EnemyNum = (int) random.nextInt(3) + 2;
+        EnemyNum = (int) random.nextInt(2) + 1;
     }
 
     public int getEnemyLocation() {
