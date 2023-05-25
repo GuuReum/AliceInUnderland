@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Game Start -> 게임 activity로 전환
     public void ClickStartButton(View v) {
-        Intent intent = new Intent(this,MainPlaying.class);
+        //Intent intent = new Intent(this,MainPlaying.class); //변경 전
+        Intent intent = new Intent(this, MainPlayingA.class); // 변경 후
         startActivity(intent);
     }
 }

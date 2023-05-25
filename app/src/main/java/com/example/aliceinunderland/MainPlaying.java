@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,14 +42,14 @@ public class MainPlaying extends AppCompatActivity {
         setContentView(R.layout.playing_main);
 
         //주인공 이미지뷰, class 설정
-        playerImageView = (ImageView)findViewById(R.id.GameProta);
+        playerImageView = (ImageView) findViewById(R.id.GameProta);
         player = new Player(this, playerImageView);
 
         //타이머 클래스 생성 및 타이머뷰 설정
         countdownText = findViewById(R.id.TimeText);
         playTimer.start();
-
-        leftBtn = (ImageView)findViewById(R.id.MoveLeftBtn);
+/*
+        leftBtn = (ImageView) findViewById(R.id.MoveLeftBtn);
         leftBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -57,15 +58,16 @@ public class MainPlaying extends AppCompatActivity {
             }
         });
 
-        RightBtn = (ImageView)findViewById(R.id.MoveRightBtn);
+        RightBtn = (ImageView) findViewById(R.id.MoveRightBtn);
         RightBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
                 playerImageView.setX(playerImageView.getX() + 5);
                 return true;
             }
         });
-
+ */
         //화면 터치 시 발사 이벤트
         View shootview = findViewById(R.id.ShootTouchView);
         shootview.setOnTouchListener(new View.OnTouchListener() {
@@ -84,6 +86,7 @@ public class MainPlaying extends AppCompatActivity {
                                     enemyBotImageView.remove(i);
                                     enemyBot.remove(i);
                                     Wave.removelocation(i);
+                                    player.addBullet();
 
                                     break; //한마리만 사격
                                 }
@@ -101,7 +104,7 @@ public class MainPlaying extends AppCompatActivity {
 
     //타이머 종료시 액티비티 종료 후 End로
     public void EndPlaying() {
-        Intent intent = new Intent(this,MainEnd.class);
+        Intent intent = new Intent(this, MainEnd.class);
         startActivity(intent);
         finish();
     }
@@ -176,7 +179,7 @@ public class MainPlaying extends AppCompatActivity {
 
         enemyBotImageView.add(imageview);
         enemyBot.add(new Enemy(enemyBotImageView.get(num), Wave.getEnemyLocation()));
-        layout.addView(enemyBotImageView.get(num),2);
+        layout.addView(enemyBotImageView.get(num), 2);
         enemyBotImageView.get(num).setId(80500 + num); //id 부여 (이미지뷰 삭제할 때 필요)
     }
 
@@ -187,12 +190,16 @@ public class MainPlaying extends AppCompatActivity {
     }
 
     public void StartWave() {
-        for (int i = 0; i < Wave.getEnemyNum(); i++) {spawnEnemy();}
+        for (int i = 0; i < Wave.getEnemyNum(); i++) {
+            spawnEnemy();
+        }
         Wave.randEnemyNum();
     }
 
     public void tempClickStartWaveButton(View v) {
-        for (int i = 0; i < Wave.getEnemyNum(); i++) {spawnEnemy();}
+        for (int i = 0; i < Wave.getEnemyNum(); i++) {
+            spawnEnemy();
+        }
         Wave.randEnemyNum();
     }
 
@@ -215,5 +222,4 @@ public class MainPlaying extends AppCompatActivity {
 
         builder.show(); // 다이얼로그 보이기
     }
-
 }

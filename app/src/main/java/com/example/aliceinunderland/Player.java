@@ -10,15 +10,13 @@ import android.view.View;
 public class Player {
     public Player(Context c, View v) {
         mainPlayingContext = c;
-        v.getLocationOnScreen(location);
     }
 
     private int loadedBullet = 5; //장전된 총알
-    private int remainBullet = 100;  //여분 총알
+    private int remainBullet = 10;  //여분 총알
     private boolean shootAble = true; // 사격 가능 여부
     private boolean reloadAble = true; // 재장전 가능 여부
     private Context mainPlayingContext;
-    public int[] location = new int[2]; // 플레이어의 위치
 
     //총알 한 발 사격
     public void shootBullet(float shootVectorX, float shootVectorY) {
@@ -39,6 +37,10 @@ public class Player {
 
             ((MainPlaying) mainPlayingContext).setTempText("(" + shootVectorX + "," + shootVectorY + ")");
         }
+    }
+
+    public void addBullet(){
+        remainBullet++;
     }
 
     //총알 삽입
@@ -78,7 +80,6 @@ public class Player {
                         ((MainPlaying) mainPlayingContext).setTempText("Reload complete");
                         setReloadAble();
                         setShootAble();
-                        return;
                     }
                 }
             }, 300 * i);
