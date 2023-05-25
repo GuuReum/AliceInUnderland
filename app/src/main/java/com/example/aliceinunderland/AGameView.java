@@ -59,7 +59,7 @@ public class AGameView extends View {
         canvasHeight = getHeight();
         canvasWidth = getWidth();
 
-        Log.v("playerPos", player.getX() + ", " + player.getY());
+        Log.v("playerPos", player.getX() + ", " + player.getY() +"A"+ canvasWidth);
 
         //backgroundImage의 크기와 canvas의 크기가 다를 경우 Resizing
         if (backgroundImage.getWidth() != canvasWidth || backgroundImage.getHeight() != canvasHeight)

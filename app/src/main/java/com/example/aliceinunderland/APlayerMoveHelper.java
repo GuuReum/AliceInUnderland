@@ -18,10 +18,8 @@ public class APlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
 
     //좌우이동 기능
     protected Integer doInBackground(Integer... integers) {
-        mX = integers[0];
+        mX = 900; //integers[0];
         mY = integers[1];
-
-        Log.v("playerPos", mGameView.player.getX() + ", " + mGameView.player.getY() + " / " + mX + ", " + mY);
 
         while (true) {
             if (left)
