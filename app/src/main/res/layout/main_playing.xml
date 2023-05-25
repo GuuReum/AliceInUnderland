@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_a">
 
-    <com.example.aliceinunderland.GameViewA
+    <com.example.aliceinunderland.AGameView
         android:id="@+id/gameView"
         android:layout_width="match_parent"
         android:layout_height="280dp"
@@ -19,6 +19,7 @@
         tools:ignore="MissingConstraints" />
 
     <LinearLayout
+        android:id="@+id/UILayout"
         android:layout_width="match_parent"
         android:layout_height="109dp"
         android:orientation="horizontal"
@@ -34,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:onClick="onClickLeftBtn"
             app:srcCompat="@drawable/moveleftbutton" />
 
         <ImageView
@@ -41,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:onClick="onClickRightBtn"
             app:srcCompat="@drawable/moverightbutton" />
 
         <LinearLayout
@@ -92,6 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClickReloadBtn"
             app:srcCompat="@drawable/reloadbutton" />
     </LinearLayout>
 
