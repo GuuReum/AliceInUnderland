@@ -7,6 +7,14 @@ public class APlayer {
     private int x = 0;
     private int y = 0;
     final private int size = 200;
+    private boolean isAlive = true;
+    public boolean isAlive() {
+        return isAlive;
+    }
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
     private Drawable playerImage;
 
     public void setPlayerImage(Drawable drawable) {
@@ -36,5 +44,9 @@ public class APlayer {
 
     public int getY() {
         return y;
+    }
+
+    public int getSize() {
+        return size;
     }
 }

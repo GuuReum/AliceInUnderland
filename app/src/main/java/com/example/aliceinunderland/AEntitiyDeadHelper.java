@@ -1,22 +1,32 @@
 package com.example.aliceinunderland;
 
+import androidx.annotation.NonNull;
+
 public class AEntitiyDeadHelper {
     //Enemy의 사망 판정
-    public boolean isDeadEnemy(AEnemy mEnemy, int touchX, int touchY) {
-        AEnemy enemy = mEnemy;
+    public boolean isDeadEnemy(@NonNull AEnemy mEnemy, int touchX, int touchY) {
+        //enemy left, top, right, bottom
+        int[] enemyPos = {mEnemy.getX(), mEnemy.getY(),
+                mEnemy.getX() + mEnemy.getSize(), mEnemy.getY() + mEnemy.getSize()};
 
         //if enemy를 터치했다면 enemy dead
-        if ((enemy.getX() < touchX && touchX < (enemy.getX() + enemy.getSize()))
-                        || (enemy.getY() < touchY && (touchY < enemy.getY() + enemy.getSize()))){
-            enemy.setIsAlive();
+        if ((enemyPos[0] <= touchX && touchX <= enemyPos[2])
+                || (enemyPos[1] <= touchY && touchY <= enemyPos[3])) {
+            mEnemy.setIsAlive();
             return true;
 
         }
-            return false;
+        return false;
     }
 
-    public boolean isDeadPlayer() {
+    public boolean isDeadPlayer(@NonNull AEnemy mEnemy, @NonNull APlayer mPlayer) {
+        //player left, right
+        int playerPosHor[] = {mPlayer.getX(), mPlayer.getX() + mPlayer.getSize()};
+        //enemy left, right
+        int enemyPosHor[] = {mEnemy.getX(), mEnemy.getX() + mEnemy.getSize()};
 
-        return false;
+        //살아 있다면 true, 죽었다면 false를 return
+        return !((playerPosHor[0] <= enemyPosHor[1] && enemyPosHor[1] <= playerPosHor[1])
+                || (enemyPosHor[0] <= playerPosHor[1] && playerPosHor[1] <= enemyPosHor[1]));
     }
 }
