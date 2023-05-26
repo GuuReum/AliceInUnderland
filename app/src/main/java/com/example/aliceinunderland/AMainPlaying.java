@@ -11,7 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AMainPlaying extends AppCompatActivity {
     private AGameView gameView;
-    private APlayer player;
+    private APlayer player = new APlayer();
+    public APlayer getAPlayer(){
+        return player;
+    }
     private APlayerMoveHelper playerMoveHelper;
     private ATimer timer;
     private TextView timerText;
@@ -23,9 +26,6 @@ public class AMainPlaying extends AppCompatActivity {
         timerText = (TextView) findViewById(R.id.timer);
         timer = new ATimer(600000, 1000, timerText, this);
         timer.start();
-
-        player = new APlayer();
-        gameView.setPlayer(player);
 
         gameView = (AGameView) findViewById(R.id.gameView);
         gameView.invalidate();
