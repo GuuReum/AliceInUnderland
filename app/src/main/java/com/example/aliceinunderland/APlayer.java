@@ -7,7 +7,7 @@ public class APlayer {
     private int x = 0;
     private int y = 0;
     final private int size = 200;
-    Drawable playerImage;
+    private Drawable playerImage;
 
     public void setPlayerImage(Drawable drawable) {
         playerImage = drawable;

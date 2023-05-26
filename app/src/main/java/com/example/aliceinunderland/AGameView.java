@@ -12,7 +12,7 @@ import android.view.View;
 import java.util.ArrayList;
 
 public class AGameView extends View {
-    public APlayer player;
+    private APlayer player;
     private Bitmap backgroundImage;
 
     private int canvasHeight = 1;
@@ -20,14 +20,16 @@ public class AGameView extends View {
 
     public AGameView(Context context) {
         super(context);
-        player = new APlayer();
         initSetting(context);
     }
 
     public AGameView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        player = new APlayer();
         initSetting(context);
+    }
+
+    public void setPlayer(APlayer mPlayer){
+        player = mPlayer;
     }
 
     //초기 설정

@@ -6,14 +6,16 @@ import android.util.Log;
 public class APlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
 
     private AGameView mGameView;
+    private APlayer player;
     private Integer mX, mY; // player의 현재 위치
 
     //이동 방향 결정
     private boolean left = false;
     private boolean right = false;
 
-    public APlayerMoveHelper(AGameView gameView) {
+    public APlayerMoveHelper(AGameView gameView, APlayer mPlayer) {
         mGameView = gameView;
+        player = mPlayer;
     }
 
     //좌우이동 기능
@@ -39,7 +41,7 @@ public class APlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
 
-        mGameView.player.setX(values[0]);
+        player.setX(values[0]);
         mGameView.invalidate();
     }
 
