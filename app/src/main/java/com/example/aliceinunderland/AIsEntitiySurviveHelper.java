@@ -2,7 +2,7 @@ package com.example.aliceinunderland;
 
 import androidx.annotation.NonNull;
 
-public class AEntitiyDeadHelper {
+public class AIsEntitiySurviveHelper {
     //Enemy의 사망 판정
     public boolean isDeadEnemy(@NonNull AEnemy mEnemy, int touchX, int touchY) {
         //enemy left, top, right, bottom
