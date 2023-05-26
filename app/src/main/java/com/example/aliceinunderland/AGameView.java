@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class AGameView extends View {
     public APlayer player;
-    private ArrayList<Enemy> enemyArray;
     private Bitmap backgroundImage;
 
     private int canvasHeight = 1;
@@ -22,21 +21,17 @@ public class AGameView extends View {
     public AGameView(Context context) {
         super(context);
         player = new APlayer();
-        enemyArray = new ArrayList<>();
         initSetting(context);
     }
 
     public AGameView(Context context, AttributeSet attrs) {
         super(context, attrs);
         player = new APlayer();
-        enemyArray = new ArrayList<>();
         initSetting(context);
     }
 
     //초기 설정
     private void initSetting(Context context) {
-        player.setX(getHeight());
-        player.setY(getWidth());
         Resources res = context.getResources();
         //player 이미지 설정
         player.setPlayerImage(res.getDrawable(R.drawable.prota));

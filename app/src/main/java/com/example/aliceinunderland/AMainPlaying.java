@@ -1,19 +1,27 @@
 package com.example.aliceinunderland;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AMainPlaying extends AppCompatActivity {
     private AGameView gameView;
     private APlayerMoveHelper playerMoveHelper;
+    private ATimer timer;
+    private TextView timerText;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_playing);
+
+        timerText = (TextView) findViewById(R.id.timer);
+        timer = new ATimer(600000, 1000, timerText, this);
+        timer.start();
 
         gameView = (AGameView) findViewById(R.id.gameView);
         gameView.invalidate();
@@ -21,6 +29,7 @@ public class AMainPlaying extends AppCompatActivity {
         playerMoveHelper = new APlayerMoveHelper(gameView);
         playerMoveHelper.execute(gameView.player.getX(), gameView.player.getY());
     }
+
 
     public void onClickLeftBtn(View view) {
         ImageView leftBtn = findViewById(R.id.moveLeftBtn);
@@ -57,5 +66,11 @@ public class AMainPlaying extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+    }
+
+    public void gameClear(){
+        Intent intent = new Intent(this, MainEnd.class);
+        startActivity(intent);
+        finish();
     }
 }
