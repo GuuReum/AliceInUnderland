@@ -24,7 +24,6 @@
         <activity
             android:name=".AMainPlaying"
             android:screenOrientation="landscape" />
-        <activity android:name=".MainPlaying" />
         <activity android:name=".MainEnd" />
     </application>
 
