@@ -100,8 +100,7 @@ public class AMainPlaying extends AppCompatActivity {
     }
 
     public void onTouchToShoot(View v) {
-        View shootview = findViewById(R.id.gameView);
-        shootview.setOnTouchListener(new View.OnTouchListener() {
+        gameView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 float curX = event.getX();  //눌린 곳의 X좌표
@@ -110,6 +109,7 @@ public class AMainPlaying extends AppCompatActivity {
                 if (player.isShootAble()) {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         if (player.getLoadedBullet() > 0) {
+                            gameView.checkEnemyDead((int) curX,(int) curY);
                             player.shootBullet();
                             loadBulletImage();
                         }

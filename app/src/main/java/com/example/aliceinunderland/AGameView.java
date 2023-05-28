@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class AGameView extends View {
     private APlayer player;
     private AEnemy enemy = new AEnemy();
+    private AIsEntitiySurviveHelper isEntitiySurviveHelper = new AIsEntitiySurviveHelper();
     private Bitmap backgroundImage;
 
     private int canvasHeight = 1;
@@ -81,6 +82,12 @@ public class AGameView extends View {
         if(enemy.getIsAlive()){
             enemy.setBounds();
             enemy.draw(canvas);
+        }
+    }
+
+    public void checkEnemyDead(int x, int y) {
+        if (enemy != null) {
+            boolean a = isEntitiySurviveHelper.isDeadEnemy(enemy, x, y);
         }
     }
 }
