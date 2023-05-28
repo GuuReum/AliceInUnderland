@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class AGameView extends View {
     private APlayer player;
-    private AEnemy enemy = new AEnemy();
+    private ArrayList<AEnemy> enemy = new ArrayList<>();
     private AIsEntitiySurviveHelper isEntitiySurviveHelper = new AIsEntitiySurviveHelper();
     private Bitmap backgroundImage;
 
@@ -37,8 +37,6 @@ public class AGameView extends View {
         Resources res = context.getResources();
         //player 이미지 설정
         player.setPlayerImage(res.getDrawable(R.drawable.prota));
-        //Enemy 이미지 설정, temp
-        enemy.setEnemyImage(res.getDrawable(R.drawable.enemy300));
         //background 이미지 설정
         backgroundImage = BitmapFactory.decodeResource(res, R.drawable.background);
     }
@@ -53,9 +51,6 @@ public class AGameView extends View {
             firstDraw = false;
             player.setX((int) getWidth() / 2);
             player.setY(getHeight());
-
-            //temp
-            enemy.setY(getHeight());
         }
 
         canvasHeight = getHeight();
@@ -79,15 +74,35 @@ public class AGameView extends View {
         //적이 죽었다면 draw하지 않아야 함.
         //이 부분은 Enemy를 ArrayList로 관리해서, 반복문을 수행하게 하면 될 것 같음.
         //그래서 해당 enemy가 죽으면 그 부분은 관리하지 않도록..
-        if(enemy.getIsAlive()){
-            enemy.setBounds();
-            enemy.draw(canvas);
+        for (AEnemy e : enemy) {
+            if (e.getIsAlive()) {
+                e.setBounds();
+                e.draw(canvas);
+            }
         }
     }
 
-    public void checkEnemyDead(int x, int y) {
-        if (enemy != null) {
-            boolean a = isEntitiySurviveHelper.isDeadEnemy(enemy, x, y);
+    public void spawnEnemy(Context c, int x) {
+        AEnemy e = new AEnemy();
+        //Enemy 이미지 설정
+        e.setEnemyImage(c.getDrawable(R.drawable.enemy300));
+        //Enemy 위치 설정
+        e.setX(x);
+        e.setY(getHeight());
+
+        enemy.add(e);
+    }
+
+    public void checkEnemyDead(int x, int y, AEnemyWave wave) {
+        for (int i = enemy.size() - 1; i >= 0; i--) {
+            if (enemy.get(i) != null) {
+                if (isEntitiySurviveHelper.isDeadEnemy(enemy.get(i), x, y)) {
+                    enemy.remove(i);
+                    wave.removelocation(i);
+
+                    break; //한 명만 사격
+                }
+            }
         }
     }
 }

@@ -20,8 +20,15 @@ public class ATimer extends CountDownTimer {
         remainMin = (int) (time % 3600000) / 60000;
         //남은 시간의 초 단위 표시
         remainSec = (int) ((time % 3600000) % 60000) / 1000;
+        //Wave 불러오기용 초
+        int wavesec = (int) (time / 1000) % 10;
 
         timerTextView.setText(remainMin + " : " + remainSec);
+
+        if (wavesec == 9) {  //10초마다 (1의 자리수가 9가 될 때마다)
+            ((AMainPlaying) mContext).StartWave();  //웨이브 시작
+        }
+
     }
 
     private Context mContext;

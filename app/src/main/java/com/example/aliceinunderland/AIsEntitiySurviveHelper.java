@@ -11,7 +11,7 @@ public class AIsEntitiySurviveHelper {
 
         //if enemy를 터치했다면 enemy dead
         if ((enemyPos[0] <= touchX && touchX <= enemyPos[2])
-                || (enemyPos[1] <= touchY && touchY <= enemyPos[3])) {
+                && (enemyPos[1] <= touchY && touchY <= enemyPos[3])) {
             mEnemy.setIsAlive();
             return true;
 

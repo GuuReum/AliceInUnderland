@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AMainPlaying extends AppCompatActivity {
     private AGameView gameView;
     private APlayer player = new APlayer();
+    private AEnemyWave wave = new AEnemyWave();
     public APlayer getAPlayer(){
         return player;
     }
@@ -109,7 +110,7 @@ public class AMainPlaying extends AppCompatActivity {
                 if (player.isShootAble()) {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         if (player.getLoadedBullet() > 0) {
-                            gameView.checkEnemyDead((int) curX,(int) curY);
+                            gameView.checkEnemyDead((int) curX,(int) curY, wave);
                             player.shootBullet();
                             loadBulletImage();
                         }
@@ -151,6 +152,13 @@ public class AMainPlaying extends AppCompatActivity {
                 break;
         }
 
+    }
+
+    public void StartWave() {
+        for (int i = 0; i < wave.getEnemyNum(); i++) {
+            gameView.spawnEnemy(this, wave.getEnemyLocation(player.getX()));
+        }
+        wave.randEnemyNum();
     }
 
     @Override
