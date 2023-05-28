@@ -29,7 +29,7 @@ public class APlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
                 mX -= 15;
             }
             if (right) {
-                player.setDirection(false); //버그있음: player image 사라짐 -> direction 말고, 이 movehelper에서 gameview의 player 이미지를 관리하면 될 것 같음.
+                player.setDirection(false); //player image 사라짐 -> direction 말고, 이 movehelper에서 gameview의 player 이미지를 관리하면 될 것 같음.
                 mX += 15;
             }
             publishProgress(mX, mY);
