@@ -37,7 +37,7 @@ public class AEnemyWave {
     public void randEnemylocation(int playerx) { //다음 웨이브 때 소환되는 적 수 정하기 (랜덤)
         Random random = new Random();
         location = (int) random.nextInt(1600); //Enemy 랜덤하게 생성
-        while (location < playerx + 400 && location > playerx - 400) {  //player 주변에는 안나오게
+        while (location < playerx + 600 && location > playerx - 600) {  //player 주변에는 안나오게
             location = (int) random.nextInt(1600);
         }
     }

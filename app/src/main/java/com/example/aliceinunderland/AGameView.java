@@ -65,11 +65,12 @@ public class AGameView extends View {
         //Draw background
         canvas.drawBitmap(backgroundImage, 0, 0, null);
 
-        //set Bounds of player
-        player.setBounds();
-
-        //Draw player
-        player.draw(canvas);
+        if (player.isAlive()) {
+            //set Bounds of player
+            player.setBounds();
+            //Draw player
+            player.draw(canvas);
+        }
 
         //적이 죽었다면 draw하지 않아야 함.
         //이 부분은 Enemy를 ArrayList로 관리해서, 반복문을 수행하게 하면 될 것 같음.
@@ -91,6 +92,17 @@ public class AGameView extends View {
         e.setY(getHeight());
 
         enemy.add(e);
+    }
+
+    public void checkPlayerDead() {
+        for (AEnemy e : enemy) {
+            if (e != null) {
+                if (!isEntitiySurviveHelper.isDeadPlayer(e, player)) {
+                    player.setAlive(false);
+                    break;
+                } else {player.setAlive(true);}
+            }
+        }
     }
 
     public void checkEnemyDead(int x, int y, AEnemyWave wave) {

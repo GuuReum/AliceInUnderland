@@ -24,10 +24,14 @@ public class APlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
         mY = integers[1];
 
         while (true) {
-            if (left)
+            if (left) {
+                player.setDirection(true);
                 mX -= 15;
-            if (right)
+            }
+            if (right) {
+                player.setDirection(false);
                 mX += 15;
+            }
             publishProgress(mX, mY);
 
             try {
@@ -42,6 +46,7 @@ public class APlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
         super.onProgressUpdate(values);
 
         player.setX(values[0]);
+        mGameView.checkPlayerDead();
         mGameView.invalidate();
     }
 
