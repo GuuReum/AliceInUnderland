@@ -22,13 +22,13 @@ public class GameView extends View {
 
     public GameView(Context context) {
         super(context);
-        player = ((MainPlaying)context).getPlayer();
+        player = ((MainPlaying) context).getPlayer();
         initSetting(context);
     }
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        player = ((MainPlaying)context).getPlayer();
+        player = ((MainPlaying) context).getPlayer();
         initSetting(context);
     }
 
@@ -99,8 +99,12 @@ public class GameView extends View {
             if (e != null) {
                 if (!entityDeadHelper.isDeadPlayer(e, player)) {
                     player.setAlive(false);
+                    //굳이 player Alive가 필요할까? 어차피 여기서 player가 사망하면 게임도 끝나니까, 필요 없다고 생각함.
+                    //여기서 player가 사망하면 game over로 넘어가도록 하자
                     break;
-                } else {player.setAlive(true);}
+                } else {
+                    player.setAlive(true);
+                }
             }
         }
     }

@@ -9,25 +9,43 @@ public class Player {
     private int y = 0;
     final private int size = 200;
     private boolean isAlive = true;
+
     public boolean isAlive() {
         return isAlive;
     }
+
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
+
     private boolean isShootAble = true; // 사격 가능 여부
-    public boolean isShootAble() {return isShootAble;}
-    public void setShootAble(boolean shootable) {isShootAble = shootable;}
+
+    public boolean isShootAble() {
+        return isShootAble;
+    }
+
+    public void setShootAble(boolean shootable) {
+        isShootAble = shootable;
+    }
 
     private boolean isReloadAble = true; // 재장전 가능 여부
-    public boolean isReloadAble() {return isReloadAble;}
-    public void setReloadAble(boolean reloadable) {isReloadAble = reloadable;}
+
+    public boolean isReloadAble() {
+        return isReloadAble;
+    }
+
+    public void setReloadAble(boolean reloadable) {
+        isReloadAble = reloadable;
+    }
 
     private int loadedBullet = 5; //장전된 총알
+
     public int getLoadedBullet() {
         return loadedBullet;
     }
+
     private int remainBullet = 10;  //여분 총알
+
     public int getRemainBullet() {
         return remainBullet;
     }
@@ -43,8 +61,9 @@ public class Player {
         //image의 좌표 및 크기 설정
         if (direction) {
             playerImage.setBounds(x, y, x + size, y + size);
-        } else if (!direction) {
-            playerImage.setBounds(x+size, y , x, y+size);
+        }
+        if (!direction) {
+            playerImage.setBounds(x, y, x + size, y + size);
         }
     }
 
@@ -52,7 +71,9 @@ public class Player {
         playerImage.draw(canvas);
     }
 
-    public void setDirection(boolean d) {direction = d;}
+    public void setDirection(boolean d) {
+        direction = d;
+    }
 
     public void setX(int posX) {
         x = posX;
@@ -83,7 +104,8 @@ public class Player {
             public void run() {
                 setShootAble(true);
             }
-        }, 700);}
+        }, 700);
+    }
 
     public void prepareReload() {
 
