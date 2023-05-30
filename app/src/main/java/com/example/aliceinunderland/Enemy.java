@@ -12,17 +12,18 @@ public class Enemy {
 
     private boolean isAlive = true;
 
-    public void setIsAlive(){
+    public void setIsAlive() {
         isAlive = (!isAlive);
     }
 
-    public boolean getIsAlive(){
+    public boolean getIsAlive() {
         return isAlive;
     }
+
     //Enemy Image
     private Drawable enemyImage;
 
-    public void setEnemyImage(Drawable drawable){
+    public void setEnemyImage(Drawable drawable) {
         this.enemyImage = drawable;
     }
 
@@ -31,10 +32,11 @@ public class Enemy {
         enemyImage.setBounds(x, y, x + size, y + size);
     }
 
-    public void draw(Canvas canvas) {enemyImage.draw(canvas);
+    public void draw(Canvas canvas) {
+        enemyImage.draw(canvas);
     }
 
-    public int getSize(){
+    public int getSize() {
         return size;
     }
 

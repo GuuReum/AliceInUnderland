@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class GameView extends View {
     private Player player;
     private ArrayList<Enemy> enemy = new ArrayList<>();
-    private IsEntitySurviveHelper isEntitiySurviveHelper = new IsEntitySurviveHelper();
+    private EntityDeadHelper entityDeadHelper = new EntityDeadHelper();
     private Bitmap backgroundImage;
 
     private int canvasHeight = 1;
@@ -97,7 +97,7 @@ public class GameView extends View {
     public void checkPlayerDead() {
         for (Enemy e : enemy) {
             if (e != null) {
-                if (!isEntitiySurviveHelper.isDeadPlayer(e, player)) {
+                if (!entityDeadHelper.isDeadPlayer(e, player)) {
                     player.setAlive(false);
                     break;
                 } else {player.setAlive(true);}
@@ -108,7 +108,7 @@ public class GameView extends View {
     public void checkEnemyDead(int x, int y, EnemyWave wave) {
         for (int i = enemy.size() - 1; i >= 0; i--) {
             if (enemy.get(i) != null) {
-                if (isEntitiySurviveHelper.isDeadEnemy(enemy.get(i), x, y)) {
+                if (entityDeadHelper.isDeadEnemy(enemy.get(i), x, y)) {
                     enemy.remove(i);
                     wave.removelocation(i);
 
