@@ -27,7 +27,7 @@ public class Player {
     public int getLoadedBullet() {
         return loadedBullet;
     }
-    private int remainBullet = 100;  //여분 총알
+    private int remainBullet = 10;  //여분 총알
     public int getRemainBullet() {
         return remainBullet;
     }

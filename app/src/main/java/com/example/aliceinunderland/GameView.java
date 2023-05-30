@@ -22,13 +22,13 @@ public class GameView extends View {
 
     public GameView(Context context) {
         super(context);
-        player = ((MainPlaying)context).getAPlayer();
+        player = ((MainPlaying)context).getPlayer();
         initSetting(context);
     }
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        player = ((MainPlaying)context).getAPlayer();
+        player = ((MainPlaying)context).getPlayer();
         initSetting(context);
     }
 

@@ -14,7 +14,7 @@ public class MainPlaying extends AppCompatActivity {
     private GameView gameView;
     private Player player = new Player();
     private EnemyWave wave = new EnemyWave();
-    public Player getAPlayer(){
+    public Player getPlayer(){
         return player;
     }
     private PlayerMoveHelper playerMoveHelper;
