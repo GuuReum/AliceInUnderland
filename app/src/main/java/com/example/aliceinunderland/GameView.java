@@ -36,7 +36,7 @@ public class GameView extends View {
     private void initSetting(Context context) {
         Resources res = context.getResources();
         //player 이미지 설정
-        player.setPlayerImage(res.getDrawable(R.drawable.prota));
+        player.setPlayerImage(res.getDrawable(R.drawable.protaleft));
         //background 이미지 설정
         backgroundImage = BitmapFactory.decodeResource(res, R.drawable.background);
     }
@@ -46,7 +46,6 @@ public class GameView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         //처음에만 실행됨. player의 초기 좌표 설정
-
         if (firstDraw) {
             firstDraw = false;
             player.setX((int) getWidth() / 2);

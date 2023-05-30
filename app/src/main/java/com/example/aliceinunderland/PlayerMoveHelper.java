@@ -24,11 +24,9 @@ public class PlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
 
         while (true) {
             if (left) {
-                player.setDirection(true);
                 mX -= 15;
             }
             if (right) {
-                player.setDirection(false);
                 mX += 15;
             }
             publishProgress(mX, mY);

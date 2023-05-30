@@ -42,8 +42,10 @@ public class MainPlaying extends AppCompatActivity {
         leftBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN)
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    player.setPlayerImage(getResources().getDrawable(R.drawable.protaleft));
                     playerMoveHelper.setLeftAnimation();
+                }
                 if (event.getAction() == MotionEvent.ACTION_UP)
                     playerMoveHelper.setLeftAnimation();
                 return true;
@@ -56,8 +58,10 @@ public class MainPlaying extends AppCompatActivity {
         rightBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN)
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    player.setPlayerImage(getResources().getDrawable(R.drawable.protaright));
                     playerMoveHelper.setRightAnimation();
+                }
                 if (event.getAction() == MotionEvent.ACTION_UP)
                     playerMoveHelper.setRightAnimation();
                 return true;

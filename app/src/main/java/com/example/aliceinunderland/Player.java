@@ -51,7 +51,6 @@ public class Player {
     }
 
     private Drawable playerImage;
-    private boolean direction = true; //true -> left, false -> right
 
     public void setPlayerImage(Drawable drawable) {
         playerImage = drawable;
@@ -59,22 +58,11 @@ public class Player {
 
     public void setBounds() {
         //image의 좌표 및 크기 설정
-        if (direction) {
-            //TODO:player의 이미지: 왼쪽을 바라봄
-            playerImage.setBounds(x, y, x + size, y + size);
-        }
-        if (!direction) {
-            //TODO:player의 이미지: 오른쪽을 바라봄
-            playerImage.setBounds(x, y, x + size, y + size);
-        }
+        playerImage.setBounds(x, y, x + size, y + size);
     }
 
     public void draw(Canvas canvas) {
         playerImage.draw(canvas);
-    }
-
-    public void setDirection(boolean d) {
-        direction = d;
     }
 
     public void setX(int posX) {
