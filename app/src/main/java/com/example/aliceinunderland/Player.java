@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 
-public class APlayer {
+public class Player {
     private int x = 0;
     private int y = 0;
     final private int size = 200;

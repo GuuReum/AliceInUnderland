@@ -3,7 +3,7 @@ package com.example.aliceinunderland;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 
-public class AEnemy {
+public class Enemy {
     //Enemy의 좌표
     private int x = 0;
     private int y = 0;

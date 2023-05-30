@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name=".AMainPlaying"
+            android:name=".MainPlaying"
             android:screenOrientation="landscape" />
         <activity android:name=".MainEnd" />
     </application>

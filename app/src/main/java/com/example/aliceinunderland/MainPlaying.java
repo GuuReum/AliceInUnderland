@@ -10,15 +10,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AMainPlaying extends AppCompatActivity {
-    private AGameView gameView;
-    private APlayer player = new APlayer();
-    private AEnemyWave wave = new AEnemyWave();
-    public APlayer getAPlayer(){
+public class MainPlaying extends AppCompatActivity {
+    private GameView gameView;
+    private Player player = new Player();
+    private EnemyWave wave = new EnemyWave();
+    public Player getAPlayer(){
         return player;
     }
-    private APlayerMoveHelper playerMoveHelper;
-    private ATimer timer;
+    private PlayerMoveHelper playerMoveHelper;
+    private Timer timer;
     private TextView timerText;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +26,13 @@ public class AMainPlaying extends AppCompatActivity {
         setContentView(R.layout.main_playing);
 
         timerText = (TextView) findViewById(R.id.timer);
-        timer = new ATimer(600000, 1000, timerText, this);
+        timer = new Timer(600000, 1000, timerText, this);
         timer.start();
 
-        gameView = (AGameView) findViewById(R.id.gameView);
+        gameView = (GameView) findViewById(R.id.gameView);
         gameView.invalidate();
 
-        playerMoveHelper = new APlayerMoveHelper(gameView, player);
+        playerMoveHelper = new PlayerMoveHelper(gameView, player);
         playerMoveHelper.execute(player.getX(), player.getY());
     }
 

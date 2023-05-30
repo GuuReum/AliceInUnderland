@@ -1,19 +1,18 @@
 package com.example.aliceinunderland;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-public class APlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
+public class PlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
 
-    private AGameView mGameView;
-    private APlayer player;
+    private GameView mGameView;
+    private Player player;
     private Integer mX, mY; // player의 현재 위치
 
     //이동 방향 결정
     private boolean left = false;
     private boolean right = false;
 
-    public APlayerMoveHelper(AGameView gameView, APlayer mPlayer) {
+    public PlayerMoveHelper(GameView gameView, Player mPlayer) {
         mGameView = gameView;
         player = mPlayer;
     }
@@ -46,7 +45,7 @@ public class APlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
         super.onProgressUpdate(values);
 
         player.setX(values[0]);
-        //mGameView.checkPlayerDead();
+        mGameView.checkPlayerDead();
         mGameView.invalidate();
     }
 

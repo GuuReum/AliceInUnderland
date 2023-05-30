@@ -11,24 +11,24 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-public class AGameView extends View {
-    private APlayer player;
-    private ArrayList<AEnemy> enemy = new ArrayList<>();
-    private AIsEntitiySurviveHelper isEntitiySurviveHelper = new AIsEntitiySurviveHelper();
+public class GameView extends View {
+    private Player player;
+    private ArrayList<Enemy> enemy = new ArrayList<>();
+    private IsEntitySurviveHelper isEntitiySurviveHelper = new IsEntitySurviveHelper();
     private Bitmap backgroundImage;
 
     private int canvasHeight = 1;
     private int canvasWidth = 1;
 
-    public AGameView(Context context) {
+    public GameView(Context context) {
         super(context);
-        player = ((AMainPlaying)context).getAPlayer();
+        player = ((MainPlaying)context).getAPlayer();
         initSetting(context);
     }
 
-    public AGameView(Context context, AttributeSet attrs) {
+    public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        player = ((AMainPlaying)context).getAPlayer();
+        player = ((MainPlaying)context).getAPlayer();
         initSetting(context);
     }
 
@@ -75,7 +75,7 @@ public class AGameView extends View {
         //적이 죽었다면 draw하지 않아야 함.
         //이 부분은 Enemy를 ArrayList로 관리해서, 반복문을 수행하게 하면 될 것 같음.
         //그래서 해당 enemy가 죽으면 그 부분은 관리하지 않도록..
-        for (AEnemy e : enemy) {
+        for (Enemy e : enemy) {
             if (e.getIsAlive()) {
                 e.setBounds();
                 e.draw(canvas);
@@ -84,7 +84,7 @@ public class AGameView extends View {
     }
 
     public void spawnEnemy(Context c, int x) {
-        AEnemy e = new AEnemy();
+        Enemy e = new Enemy();
         //Enemy 이미지 설정
         e.setEnemyImage(c.getDrawable(R.drawable.enemy300));
         //Enemy 위치 설정
@@ -95,7 +95,7 @@ public class AGameView extends View {
     }
 
     public void checkPlayerDead() {
-        for (AEnemy e : enemy) {
+        for (Enemy e : enemy) {
             if (e != null) {
                 if (!isEntitiySurviveHelper.isDeadPlayer(e, player)) {
                     player.setAlive(false);
@@ -105,7 +105,7 @@ public class AGameView extends View {
         }
     }
 
-    public void checkEnemyDead(int x, int y, AEnemyWave wave) {
+    public void checkEnemyDead(int x, int y, EnemyWave wave) {
         for (int i = enemy.size() - 1; i >= 0; i--) {
             if (enemy.get(i) != null) {
                 if (isEntitiySurviveHelper.isDeadEnemy(enemy.get(i), x, y)) {

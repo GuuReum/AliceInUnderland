@@ -2,9 +2,9 @@ package com.example.aliceinunderland;
 
 import androidx.annotation.NonNull;
 
-public class AIsEntitiySurviveHelper {
+public class IsEntitySurviveHelper {
     //Enemy의 사망 판정
-    public boolean isDeadEnemy(@NonNull AEnemy mEnemy, int touchX, int touchY) {
+    public boolean isDeadEnemy(@NonNull Enemy mEnemy, int touchX, int touchY) {
         //enemy left, top, right, bottom
         int[] enemyPos = {mEnemy.getX(), mEnemy.getY(),
                 mEnemy.getX() + mEnemy.getSize(), mEnemy.getY() + mEnemy.getSize()};
@@ -19,7 +19,7 @@ public class AIsEntitiySurviveHelper {
         return false;
     }
 
-    public boolean isDeadPlayer(@NonNull AEnemy mEnemy, @NonNull APlayer mPlayer) {
+    public boolean isDeadPlayer(@NonNull Enemy mEnemy, @NonNull Player mPlayer) {
         //player left, right
         int playerPosHor[] = {mPlayer.getX(), mPlayer.getX() + mPlayer.getSize()};
         //enemy left, right

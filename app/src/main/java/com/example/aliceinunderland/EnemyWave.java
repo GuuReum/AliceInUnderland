@@ -1,11 +1,9 @@
 package com.example.aliceinunderland;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.Random;
 
-public class AEnemyWave {
+public class EnemyWave {
 
     private int EnemyNum = 2;  //이번 웨이브 적 스폰 수
     private int location;  //스폰되는 적의 위치

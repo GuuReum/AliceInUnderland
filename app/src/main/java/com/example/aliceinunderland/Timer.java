@@ -4,8 +4,8 @@ import android.content.Context;
 import android.os.CountDownTimer;
 import android.widget.TextView;
 
-public class ATimer extends CountDownTimer {
-    public ATimer(long maxPlayMillis, long coolDownMillis, TextView textView, Context c) {
+public class Timer extends CountDownTimer {
+    public Timer(long maxPlayMillis, long coolDownMillis, TextView textView, Context c) {
         super(maxPlayMillis, coolDownMillis);
         timerTextView = textView;
         mContext = c;
@@ -26,7 +26,7 @@ public class ATimer extends CountDownTimer {
         timerTextView.setText(remainMin + " : " + remainSec);
 
         if (wavesec == 9) {  //10초마다 (1의 자리수가 9가 될 때마다)
-            ((AMainPlaying) mContext).StartWave();  //웨이브 시작
+            ((MainPlaying) mContext).StartWave();  //웨이브 시작
         }
 
     }
@@ -34,6 +34,6 @@ public class ATimer extends CountDownTimer {
     private Context mContext;
 
     public void onFinish() {
-        ((AMainPlaying) mContext).gameClear();
+        ((MainPlaying) mContext).gameClear();
     }
 }

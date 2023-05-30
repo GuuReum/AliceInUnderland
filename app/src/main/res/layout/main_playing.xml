@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_a">
 
-    <com.example.aliceinunderland.AGameView
+    <com.example.aliceinunderland.GameView
         android:id="@+id/gameView"
         android:layout_width="match_parent"
         android:layout_height="280dp"
