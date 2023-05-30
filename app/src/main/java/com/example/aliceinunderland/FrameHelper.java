@@ -1,8 +1,8 @@
 package com.example.aliceinunderland;
 
 import android.os.AsyncTask;
-
-public class PlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
+//TODO: mX, mY를 player class에 넣어주자.
+public class FrameHelper extends AsyncTask<Integer, Integer, Integer> {
 
     private GameView mGameView;
     private Player player;
@@ -12,7 +12,7 @@ public class PlayerMoveHelper extends AsyncTask<Integer, Integer, Integer> {
     private boolean left = false;
     private boolean right = false;
 
-    public PlayerMoveHelper(GameView gameView, Player mPlayer) {
+    public FrameHelper(GameView gameView, Player mPlayer) {
         mGameView = gameView;
         player = mPlayer;
     }

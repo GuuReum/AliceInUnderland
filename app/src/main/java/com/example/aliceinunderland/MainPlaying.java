@@ -17,7 +17,7 @@ public class MainPlaying extends AppCompatActivity {
     public Player getPlayer(){
         return player;
     }
-    private PlayerMoveHelper playerMoveHelper;
+    private FrameHelper frameHelper;
     private Timer timer;
     private TextView timerText;
 
@@ -32,8 +32,8 @@ public class MainPlaying extends AppCompatActivity {
         gameView = (GameView) findViewById(R.id.gameView);
         gameView.invalidate();
 
-        playerMoveHelper = new PlayerMoveHelper(gameView, player);
-        playerMoveHelper.execute(player.getX(), player.getY());
+        frameHelper = new FrameHelper(gameView, player);
+        frameHelper.execute(player.getX(), player.getY());
     }
 
 
@@ -44,10 +44,10 @@ public class MainPlaying extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     player.setPlayerImage(getResources().getDrawable(R.drawable.protaleft));
-                    playerMoveHelper.setLeftAnimation();
+                    frameHelper.setLeftAnimation();
                 }
                 if (event.getAction() == MotionEvent.ACTION_UP)
-                    playerMoveHelper.setLeftAnimation();
+                    frameHelper.setLeftAnimation();
                 return true;
             }
         });
@@ -60,10 +60,10 @@ public class MainPlaying extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     player.setPlayerImage(getResources().getDrawable(R.drawable.protaright));
-                    playerMoveHelper.setRightAnimation();
+                    frameHelper.setRightAnimation();
                 }
                 if (event.getAction() == MotionEvent.ACTION_UP)
-                    playerMoveHelper.setRightAnimation();
+                    frameHelper.setRightAnimation();
                 return true;
             }
         });
