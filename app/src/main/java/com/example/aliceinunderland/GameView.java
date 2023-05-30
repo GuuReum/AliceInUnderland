@@ -85,7 +85,7 @@ public class GameView extends View {
     public void spawnEnemy(Context c, int x) {
         Enemy e = new Enemy();
         //Enemy 이미지 설정
-        e.setEnemyImage(c.getDrawable(R.drawable.enemy300));
+        e.setEnemyImage(c.getDrawable(R.drawable.enemyleft));
         //Enemy 위치 설정
         e.setX(x);
         e.setY(getHeight());
