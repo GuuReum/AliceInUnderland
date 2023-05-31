@@ -160,7 +160,7 @@ public class MainPlaying extends AppCompatActivity {
 
     public void StartWave() {
         for (int i = 0; i < wave.getEnemyNum(); i++) {
-            gameView.spawnEnemy(this, wave.getEnemyLocation(player.getX()));
+            gameView.spawnEnemy(wave.getEnemyLocation(player.getX()));
         }
         wave.randEnemyNum();
     }

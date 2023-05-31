@@ -37,9 +37,11 @@ public class FrameHelper extends AsyncTask<Integer, Integer, Integer> {
 
             for(Enemy e : enemy) {
                 if (e.getX() > player.getX()){
+                    mGameView.setEnemyLeftImage(e);
                     e.setX(e.getX()-1);
                 }
                 if (e.getX() < player.getX()) {
+                    mGameView.setEnemyRightImage(e);
                     e.setX(e.getX() + 1);
                 }
             }

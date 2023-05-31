@@ -16,6 +16,7 @@ public class GameView extends View {
     private ArrayList<Enemy> enemy = new ArrayList<>();
     private EntityDeadHelper entityDeadHelper = new EntityDeadHelper();
     private Bitmap backgroundImage;
+    private Context mcontext;
 
     private int canvasHeight = 1;
     private int canvasWidth = 1;
@@ -23,12 +24,14 @@ public class GameView extends View {
     public GameView(Context context) {
         super(context);
         player = ((MainPlaying) context).getPlayer();
+        mcontext = context;
         initSetting(context);
     }
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
         player = ((MainPlaying) context).getPlayer();
+        mcontext = context;
         initSetting(context);
     }
 
@@ -82,18 +85,21 @@ public class GameView extends View {
         }
     }
 
-    public void spawnEnemy(Context c, int x) {
+    public void spawnEnemy(int x) {
         Enemy e = new Enemy();
         //Enemy 이미지 설정
-        e.setEnemyImage(c.getDrawable(R.drawable.enemyleft));
+        e.setEnemyImage(mcontext.getDrawable(R.drawable.enemyleft));
         //Enemy 위치 설정
         e.setX(x);
         e.setY(getHeight());
 
         enemy.add(e);
         int i = enemy.size() - 1;
-        ((MainPlaying)c).addEnemyInHelper(enemy.get(i));
+        ((MainPlaying)mcontext).addEnemyInHelper(enemy.get(i));
     }
+
+    public void setEnemyLeftImage(Enemy e) {e.setEnemyImage(mcontext.getDrawable(R.drawable.enemyleft));}
+    public void setEnemyRightImage(Enemy e) {e.setEnemyImage(mcontext.getDrawable(R.drawable.enemyright));}
 
     public void checkPlayerDead() {
         for (Enemy e : enemy) {
