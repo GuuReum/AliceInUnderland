@@ -91,6 +91,8 @@ public class GameView extends View {
         e.setY(getHeight());
 
         enemy.add(e);
+        int i = enemy.size() - 1;
+        ((MainPlaying)c).addEnemyInHelper(enemy.get(i));
     }
 
     public void checkPlayerDead() {

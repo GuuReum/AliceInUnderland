@@ -165,6 +165,8 @@ public class MainPlaying extends AppCompatActivity {
         wave.randEnemyNum();
     }
 
+    public void addEnemyInHelper(Enemy e) {frameHelper.addEnemy(e);}
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
