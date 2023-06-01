@@ -5,8 +5,10 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 public class GameView extends View {
     private Player player;
     private ArrayList<Enemy> enemy = new ArrayList<>();
+    private EnemyWave wave = new EnemyWave();
     private EntityDeadHelper entityDeadHelper = new EntityDeadHelper();
     private Bitmap backgroundImage;
     private Context mcontext;
@@ -83,6 +86,31 @@ public class GameView extends View {
                 e.draw(canvas);
             }
         }
+    }
+
+    public boolean onTouchEvent(MotionEvent event) {
+        float curX = event.getX();  //눌린 곳의 X좌표
+        float curY = event.getY();  //눌린 곳의 Y좌표
+
+        if (player.isShootAble()) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (player.getLoadedBullet() > 0) {
+                    checkEnemyDead((int) curX,(int) curY, wave);
+                    player.shootBullet();
+                    ((MainPlaying)mcontext).loadBulletImage();
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+
+    public void StartWave() {
+        for (int i = 0; i < wave.getEnemyNum(); i++) {
+            spawnEnemy(wave.getEnemyLocation(player.getX()));
+        }
+        wave.randEnemyNum();
     }
 
     public void spawnEnemy(int x) {

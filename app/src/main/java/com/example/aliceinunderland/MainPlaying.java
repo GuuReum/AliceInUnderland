@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainPlaying extends AppCompatActivity {
     private GameView gameView;
     private Player player = new Player();
-    private EnemyWave wave = new EnemyWave();
+
     public Player getPlayer(){
         return player;
     }
@@ -104,28 +104,6 @@ public class MainPlaying extends AppCompatActivity {
         });
     }
 
-    public void onTouchToShoot(View v) {
-        gameView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                float curX = event.getX();  //눌린 곳의 X좌표
-                float curY = event.getY();  //눌린 곳의 Y좌표
-
-                if (player.isShootAble()) {
-                    if (event.getAction() == MotionEvent.ACTION_UP) {
-                        if (player.getLoadedBullet() > 0) {
-                            gameView.checkEnemyDead((int) curX,(int) curY, wave);
-                            player.shootBullet();
-                            loadBulletImage();
-                        }
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
     public void loadBulletImage() {
 
         ImageView[] bullet = new ImageView[5];
@@ -158,12 +136,7 @@ public class MainPlaying extends AppCompatActivity {
 
     }
 
-    public void StartWave() {
-        for (int i = 0; i < wave.getEnemyNum(); i++) {
-            gameView.spawnEnemy(wave.getEnemyLocation(player.getX()));
-        }
-        wave.randEnemyNum();
-    }
+    public void timeForWave() {gameView.StartWave();}
 
     public void addEnemyInHelper(Enemy e) {frameHelper.addEnemy(e);}
 
