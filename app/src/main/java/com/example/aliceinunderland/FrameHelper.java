@@ -73,4 +73,6 @@ public class FrameHelper extends AsyncTask<Integer, Integer, Integer> {
     }
 
     public void addEnemy(Enemy e) {enemy.add(e);}
+
+    public void removeEnemy(Enemy e) {enemy.remove(e);}
 }

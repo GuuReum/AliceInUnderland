@@ -139,6 +139,7 @@ public class MainPlaying extends AppCompatActivity {
     public void timeForWave() {gameView.StartWave();}
 
     public void addEnemyInHelper(Enemy e) {frameHelper.addEnemy(e);}
+    public void removeEnemyInHelper(Enemy e) {frameHelper.removeEnemy(e);}
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -150,4 +151,5 @@ public class MainPlaying extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }

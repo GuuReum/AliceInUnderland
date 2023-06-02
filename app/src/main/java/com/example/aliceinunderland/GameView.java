@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,7 +18,7 @@ public class GameView extends View {
     private EnemyWave wave = new EnemyWave();
     private EntityDeadHelper entityDeadHelper = new EntityDeadHelper();
     private Bitmap backgroundImage;
-    private Context mcontext;
+    private Context mContext;
 
     private int canvasHeight = 1;
     private int canvasWidth = 1;
@@ -27,14 +26,14 @@ public class GameView extends View {
     public GameView(Context context) {
         super(context);
         player = ((MainPlaying) context).getPlayer();
-        mcontext = context;
+        mContext = context;
         initSetting(context);
     }
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
         player = ((MainPlaying) context).getPlayer();
-        mcontext = context;
+        mContext = context;
         initSetting(context);
     }
 
@@ -97,7 +96,7 @@ public class GameView extends View {
                 if (player.getLoadedBullet() > 0) {
                     checkEnemyDead((int) curX,(int) curY, wave);
                     player.shootBullet();
-                    ((MainPlaying)mcontext).loadBulletImage();
+                    ((MainPlaying) mContext).loadBulletImage();
                 }
             }
             return true;
@@ -116,18 +115,18 @@ public class GameView extends View {
     public void spawnEnemy(int x) {
         Enemy e = new Enemy();
         //Enemy 이미지 설정
-        e.setEnemyImage(mcontext.getDrawable(R.drawable.enemyleft));
+        e.setEnemyImage(mContext.getDrawable(R.drawable.enemyleft));
         //Enemy 위치 설정
         e.setX(x);
         e.setY(getHeight());
 
         enemy.add(e);
         int i = enemy.size() - 1;
-        ((MainPlaying)mcontext).addEnemyInHelper(enemy.get(i));
+        ((MainPlaying) mContext).addEnemyInHelper(enemy.get(i));
     }
 
-    public void setEnemyLeftImage(Enemy e) {e.setEnemyImage(mcontext.getDrawable(R.drawable.enemyleft));}
-    public void setEnemyRightImage(Enemy e) {e.setEnemyImage(mcontext.getDrawable(R.drawable.enemyright));}
+    public void setEnemyLeftImage(Enemy e) {e.setEnemyImage(mContext.getDrawable(R.drawable.enemyleft));}
+    public void setEnemyRightImage(Enemy e) {e.setEnemyImage(mContext.getDrawable(R.drawable.enemyright));}
 
     public void checkPlayerDead() {
         for (Enemy e : enemy) {
@@ -148,8 +147,9 @@ public class GameView extends View {
         for (int i = enemy.size() - 1; i >= 0; i--) {
             if (enemy.get(i) != null) {
                 if (entityDeadHelper.isDeadEnemy(enemy.get(i), x, y)) {
-                    enemy.remove(i);
                     wave.removelocation(i);
+                    ((MainPlaying) mContext).removeEnemyInHelper(enemy.get(i));
+                    enemy.remove(i);
 
                     break; //한 명만 사격
                 }
