@@ -27,16 +27,18 @@ public class FrameHelper extends AsyncTask<Integer, Integer, Integer> {
 
         while (true) {
             if (left) {
-                PmX -= 15;
+                if (PmX >= 0)
+                    PmX -= 15;
             }
             if (right) {
-                PmX += 15;
+                if (PmX <= mGameView.getWidth() - player.getSize())
+                    PmX += 15;
             }
 
-            for(Enemy e : enemy) {
-                if (e.getX() > player.getX()){
+            for (Enemy e : enemy) {
+                if (e.getX() > player.getX()) {
                     mGameView.setEnemyLeftImage(e);
-                    e.setX(e.getX()-1);
+                    e.setX(e.getX() - 1);
                 }
                 if (e.getX() < player.getX()) {
                     mGameView.setEnemyRightImage(e);
@@ -52,6 +54,7 @@ public class FrameHelper extends AsyncTask<Integer, Integer, Integer> {
             }
         }
     }
+
 
     @Override
     protected void onProgressUpdate(Integer... values) {
@@ -71,7 +74,11 @@ public class FrameHelper extends AsyncTask<Integer, Integer, Integer> {
         right = (!right);
     }
 
-    public void addEnemy(Enemy e) {enemy.add(e);}
+    public void addEnemy(Enemy e) {
+        enemy.add(e);
+    }
 
-    public void removeEnemy(Enemy e) {enemy.remove(e);}
+    public void removeEnemy(Enemy e) {
+        enemy.remove(e);
+    }
 }
