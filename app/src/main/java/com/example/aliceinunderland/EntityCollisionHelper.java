@@ -2,7 +2,7 @@ package com.example.aliceinunderland;
 
 import androidx.annotation.NonNull;
 
-public class EntityDeadHelper {
+public class EntityCollisionHelper {
     //Enemy의 사망 판정
     public boolean isDeadEnemy(@NonNull Enemy mEnemy, int touchX, int touchY) {
         //enemy left, top, right, bottom
@@ -28,5 +28,13 @@ public class EntityDeadHelper {
         //살아 있다면 true, 죽었다면 false를 return
         return !((playerPosHor[0] <= enemyPosHor[1] && enemyPosHor[1] <= playerPosHor[1])
                 || (enemyPosHor[0] <= playerPosHor[1] && playerPosHor[1] <= enemyPosHor[1]));
+    }
+
+    public boolean playerGetBullet(@NonNull droppedBullet mDroppedBullet ,@NonNull Player mPlayer){
+        int playerPosHor[] = {mPlayer.getX(), mPlayer.getX() + mPlayer.getSize()};
+        int droppedBulletHor[] = {mDroppedBullet.x, mDroppedBullet.x + mDroppedBullet.size};
+
+        return !((playerPosHor[0] <= droppedBulletHor[1] && droppedBulletHor[1] <= playerPosHor[1])
+                || (droppedBulletHor[0] <= playerPosHor[1] && playerPosHor[1] <= droppedBulletHor[1]));
     }
 }

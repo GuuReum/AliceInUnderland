@@ -4,8 +4,6 @@ import android.os.AsyncTask;
 
 import java.util.ArrayList;
 
-//TODO: mX, mY를 player class에 넣어주자.
-//TODO: mX 없이 직접적으로 바꿔도 움직이기는 하는데?
 public class FrameHelper extends AsyncTask<Integer, Integer, Integer> {
 
     private GameView mGameView;
@@ -62,6 +60,7 @@ public class FrameHelper extends AsyncTask<Integer, Integer, Integer> {
         player.setX(values[0]);
         mGameView.checkPlayerDead();
         mGameView.invalidate();
+        mGameView.checkPlayerGetBullet();
     }
 
     public void setLeftAnimation() {

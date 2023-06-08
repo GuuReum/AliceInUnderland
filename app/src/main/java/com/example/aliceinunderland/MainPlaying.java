@@ -14,12 +14,19 @@ public class MainPlaying extends AppCompatActivity {
     private GameView gameView;
     private Player player = new Player();
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return player;
     }
+
     private FrameHelper frameHelper;
     private Timer timer;
     private TextView timerText;
+
+    private TextView remainBulletText;
+
+    public void setRemainBulletText(int i) {
+        remainBulletText.setText(Integer.toString(i));
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +35,8 @@ public class MainPlaying extends AppCompatActivity {
         timerText = (TextView) findViewById(R.id.timer);
         timer = new Timer(600000, 1000, timerText, this);
         timer.start();
+
+        remainBulletText = (TextView) findViewById(R.id.remainBullet);
 
         gameView = (GameView) findViewById(R.id.gameView);
         gameView.invalidate();
@@ -88,6 +97,7 @@ public class MainPlaying extends AppCompatActivity {
 
                                     if (player.insertBullet()) {
                                         loadBulletImage(); //이미지
+                                        remainBulletText.setText(Integer.toString(player.getRemainBullet()));
                                     } else {
                                         player.setReloadAble(true);
                                         player.setShootAble(true);
@@ -136,17 +146,24 @@ public class MainPlaying extends AppCompatActivity {
 
     }
 
-    public void timeForWave() {gameView.StartWave();}
+    public void timeForWave() {
+        gameView.StartWave();
+    }
 
-    public void addEnemyInHelper(Enemy e) {frameHelper.addEnemy(e);}
-    public void removeEnemyInHelper(Enemy e) {frameHelper.removeEnemy(e);}
+    public void addEnemyInHelper(Enemy e) {
+        frameHelper.addEnemy(e);
+    }
+
+    public void removeEnemyInHelper(Enemy e) {
+        frameHelper.removeEnemy(e);
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
 
-    public void gameClear(){
+    public void gameClear() {
         Intent intent = new Intent(this, MainEnd.class);
         startActivity(intent);
         finish();

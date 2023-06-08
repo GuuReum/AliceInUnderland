@@ -49,6 +49,9 @@ public class Player {
     public int getRemainBullet() {
         return remainBullet;
     }
+    public void getDroppedBullet() {
+        remainBullet += 1;
+    }
 
     private Drawable playerImage;
 

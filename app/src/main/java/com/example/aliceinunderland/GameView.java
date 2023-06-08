@@ -15,8 +15,10 @@ import java.util.ArrayList;
 public class GameView extends View {
     private Player player;
     private ArrayList<Enemy> enemy = new ArrayList<>();
+
+    private ArrayList<droppedBullet> droppedBullets = new ArrayList<>();
     private EnemyWave wave = new EnemyWave();
-    private EntityDeadHelper entityDeadHelper = new EntityDeadHelper();
+    private EntityCollisionHelper entityCollisionHelper = new EntityCollisionHelper();
     private Bitmap backgroundImage;
     private Context mContext;
 
@@ -76,14 +78,16 @@ public class GameView extends View {
             player.draw(canvas);
         }
 
-        //적이 죽었다면 draw하지 않아야 함.
-        //이 부분은 Enemy를 ArrayList로 관리해서, 반복문을 수행하게 하면 될 것 같음.
-        //그래서 해당 enemy가 죽으면 그 부분은 관리하지 않도록..
         for (Enemy e : enemy) {
             if (e.getIsAlive()) {
                 e.setBounds();
                 e.draw(canvas);
             }
+        }
+
+        for (droppedBullet b : droppedBullets) {
+            b.setBounds();
+            b.draw(canvas);
         }
     }
 
@@ -94,7 +98,7 @@ public class GameView extends View {
         if (player.isShootAble()) {
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (player.getLoadedBullet() > 0) {
-                    checkEnemyDead((int) curX,(int) curY, wave);
+                    checkEnemyDead((int) curX, (int) curY, wave);
                     player.shootBullet();
                     ((MainPlaying) mContext).loadBulletImage();
                 }
@@ -103,7 +107,6 @@ public class GameView extends View {
         }
         return false;
     }
-
 
     public void StartWave() {
         for (int i = 0; i < wave.getEnemyNum(); i++) {
@@ -125,13 +128,18 @@ public class GameView extends View {
         ((MainPlaying) mContext).addEnemyInHelper(enemy.get(i));
     }
 
-    public void setEnemyLeftImage(Enemy e) {e.setEnemyImage(mContext.getDrawable(R.drawable.enemyleft));}
-    public void setEnemyRightImage(Enemy e) {e.setEnemyImage(mContext.getDrawable(R.drawable.enemyright));}
+    public void setEnemyLeftImage(Enemy e) {
+        e.setEnemyImage(mContext.getDrawable(R.drawable.enemyleft));
+    }
+
+    public void setEnemyRightImage(Enemy e) {
+        e.setEnemyImage(mContext.getDrawable(R.drawable.enemyright));
+    }
 
     public void checkPlayerDead() {
         for (Enemy e : enemy) {
             if (e != null) {
-                if (!entityDeadHelper.isDeadPlayer(e, player)) {
+                if (!entityCollisionHelper.isDeadPlayer(e, player)) {
                     player.setAlive(false);
                     //굳이 player Alive가 필요할까? 어차피 여기서 player가 사망하면 게임도 끝나니까, 필요 없다고 생각함.
                     //여기서 player가 사망하면 game over로 넘어가도록 하자
@@ -143,14 +151,28 @@ public class GameView extends View {
         }
     }
 
+    public void checkPlayerGetBullet() {
+        for (int i = 0; i < droppedBullets.size(); i++) {
+            if (droppedBullets.get(i) != null) {
+                if (!entityCollisionHelper.playerGetBullet(droppedBullets.get(i), player)) {
+                    droppedBullets.remove(droppedBullets.get(i));
+
+                    player.getDroppedBullet();
+                    ((MainPlaying) mContext).setRemainBulletText(player.getRemainBullet());
+                    break;
+                }
+            }
+        }
+    }
+
     public void checkEnemyDead(int x, int y, EnemyWave wave) {
         for (int i = enemy.size() - 1; i >= 0; i--) {
             if (enemy.get(i) != null) {
-                if (entityDeadHelper.isDeadEnemy(enemy.get(i), x, y)) {
+                if (entityCollisionHelper.isDeadEnemy(enemy.get(i), x, y)) {
                     wave.removelocation(i);
                     ((MainPlaying) mContext).removeEnemyInHelper(enemy.get(i));
+                    droppedBullets.add(new droppedBullet(enemy.get(i).getX(), getHeight() - 50, mContext.getDrawable(R.drawable.dropbullet)));
                     enemy.remove(i);
-
                     break; //한 명만 사격
                 }
             }
