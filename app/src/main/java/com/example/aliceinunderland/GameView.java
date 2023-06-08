@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -91,9 +93,13 @@ public class GameView extends View {
         }
     }
 
+    private float curX;
+    private float curY;
+    private Canvas mCanvas;
+
     public boolean onTouchEvent(MotionEvent event) {
-        float curX = event.getX();  //눌린 곳의 X좌표
-        float curY = event.getY();  //눌린 곳의 Y좌표
+        curX = event.getX();  //눌린 곳의 X좌표
+        curY = event.getY();  //눌린 곳의 Y좌표
 
         if (player.isShootAble()) {
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -103,8 +109,10 @@ public class GameView extends View {
                     ((MainPlaying) mContext).loadBulletImage();
                 }
             }
+            invalidate();
             return true;
         }
+        invalidate();
         return false;
     }
 
