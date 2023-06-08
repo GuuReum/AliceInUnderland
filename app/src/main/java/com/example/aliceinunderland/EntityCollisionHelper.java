@@ -32,7 +32,7 @@ public class EntityCollisionHelper {
 
     public boolean playerGetBullet(@NonNull droppedBullet mDroppedBullet ,@NonNull Player mPlayer){
         int playerPosHor[] = {mPlayer.getX(), mPlayer.getX() + mPlayer.getSize()};
-        int droppedBulletHor[] = {mDroppedBullet.x, mDroppedBullet.x + mDroppedBullet.size};
+        int droppedBulletHor[] = {mDroppedBullet.getX(), mDroppedBullet.getX() + mDroppedBullet.getSize()};
 
         return !((playerPosHor[0] <= droppedBulletHor[1] && droppedBulletHor[1] <= playerPosHor[1])
                 || (droppedBulletHor[0] <= playerPosHor[1] && playerPosHor[1] <= droppedBulletHor[1]));

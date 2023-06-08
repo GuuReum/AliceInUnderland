@@ -4,10 +4,16 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 
 public class droppedBullet {
-    int x = 0;
-    int y = 0;
-    int size = 100;
-    Drawable droppedBulletImage;
+    private int x = 0;
+    public int getX(){
+        return x;
+    }
+    private int y = 0;
+    private int size = 100;
+    public int getSize() {
+        return size;
+    }
+    private Drawable droppedBulletImage;
 
     public droppedBullet(int mX, int mY, Drawable d) {
         x = mX;
