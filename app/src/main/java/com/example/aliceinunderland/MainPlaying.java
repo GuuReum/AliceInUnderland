@@ -172,7 +172,16 @@ public class MainPlaying extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {   // 뒤로가기 누르면 다이얼로그 생성
-        clickPause();
+        clickPause(timerText);
+    }
+
+    private long remaintime = 0;
+
+    public void clickPause(View v) {
+        frameHelper.pauseAnimator();
+        remaintime = timer.getRemainTime();
+        timer.cancel();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Paused"); // 다이얼로그 제목
         builder.setCancelable(false);   // 다이얼로그 화면 밖 터치 방지
@@ -189,14 +198,6 @@ public class MainPlaying extends AppCompatActivity {
         });
 
         builder.show(); // 다이얼로그 보이기
-    }
-
-    private long remaintime = 0;
-
-    public void clickPause() {
-        frameHelper.pauseAnimator();
-        remaintime = timer.getRemainTime();
-        timer.cancel();
     }
 
     public void clickResume() {
