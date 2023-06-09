@@ -29,7 +29,7 @@ public class ButtonUIView extends androidx.appcompat.widget.AppCompatImageView {
     public boolean onTouchEvent(MotionEvent event) {
         frameHelper = ((MainPlaying) mContext).getFrameHelper();
 
-        int id = getId();
+        int id = getId();  //눌린 버튼의 id 불러오기
 
         if (id == R.id.moveLeftBtn) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -39,7 +39,7 @@ public class ButtonUIView extends androidx.appcompat.widget.AppCompatImageView {
             if (event.getAction() == MotionEvent.ACTION_UP)
                 frameHelper.setLeftAnimation();
             return true;
-        }
+        }  //moveleft
 
         if (id == R.id.moveRightBtn) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -49,7 +49,7 @@ public class ButtonUIView extends androidx.appcompat.widget.AppCompatImageView {
             if (event.getAction() == MotionEvent.ACTION_UP)
                 frameHelper.setRightAnimation();
             return true;
-        }
+        }  //moveright
 
         if (id == R.id.reloadBtn) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -79,7 +79,7 @@ public class ButtonUIView extends androidx.appcompat.widget.AppCompatImageView {
                 }
             }
             return true;
-        }
+        }  //reload
 
         return false;
     }

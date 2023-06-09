@@ -92,11 +92,6 @@ public class MainPlaying extends AppCompatActivity {
         frameHelper.removeEnemy(e);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
     public void gameClear() {
         Intent intent = new Intent(this, MainEnd.class);
         startActivity(intent);
@@ -108,12 +103,12 @@ public class MainPlaying extends AppCompatActivity {
         clickPause(timerText);
     }
 
-    private long remaintime = 0;
+    private long remaintime = 0;  //일시정지 시 남은 시간 값
 
     public void clickPause(View v) {
-        frameHelper.pauseAnimator();
-        remaintime = timer.getRemainTime();
-        timer.cancel();
+        frameHelper.pauseAnimator();  //적 움직임 멈추기
+        remaintime = timer.getRemainTime();  //타이머에서 남은 시간 불러오기
+        timer.cancel();  //타이머 캔슬
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Paused"); // 다이얼로그 제목
@@ -134,10 +129,13 @@ public class MainPlaying extends AppCompatActivity {
     }
 
     public void clickResume() {
-        frameHelper.pauseAnimator();
-        timerText = (TextView) findViewById(R.id.timer);
-        timer = new Timer(remaintime,1000,timerText,this);
-        timer.start();
+        frameHelper.pauseAnimator();  //적 움직임 시작
+        timer = new Timer(remaintime,1000,timerText,this);  //타이머 재설정
+        timer.start();  //타이머 시작
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 }
