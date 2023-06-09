@@ -29,7 +29,7 @@ public class Timer extends CountDownTimer {
 
         timerTextView.setText(remainMin + " : " + remainSec);
 
-        if (wavesec == 9) {  //10초마다 (1의 자리수가 9가 될 때마다)
+        if (wavesec == 7) {  //10초마다 (1의 자리수가 7가 될 때마다)
             ((MainPlaying) mContext).timeForWave();  //웨이브 시작
         }
 
