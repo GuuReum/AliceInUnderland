@@ -16,7 +16,7 @@ public class EnemyWave {
 
     public void randEnemyNum() { //다음 웨이브 때 소환되는 적 수 정하기 (랜덤)
         Random random = new Random();
-        EnemyNum = (int) random.nextInt(3) + 2;  //최소2, 최대 2+3 = 5
+        EnemyNum = (int) random.nextInt(2) + 5;  //최소2, 최대 2+5 = 7
     }
 
     public int getEnemyLocation(int playerx) {

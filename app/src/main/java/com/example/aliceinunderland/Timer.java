@@ -34,6 +34,6 @@ public class Timer extends CountDownTimer {
     private Context mContext;
 
     public void onFinish() {
-        ((MainPlaying) mContext).gameClear();
+        ((MainPlaying) mContext).gameEnd();
     }
 }

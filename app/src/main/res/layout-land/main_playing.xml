@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_a"
+    android:keepScreenOn="true"
+    android:scrollbarSize="4dp">
+
+    <com.example.aliceinunderland.GameView
+        android:id="@+id/gameView"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:id="@+id/UILayout"
+        android:layout_width="match_parent"
+        android:layout_height="109dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameView"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/moveLeftBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="onClickLeftBtn"
+            app:srcCompat="@drawable/moveleftbutton"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/moveRightBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="onClickRightBtn"
+            app:srcCompat="@drawable/moverightbutton"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <LinearLayout
+            android:id="@+id/magazineLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/bulletA1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/mag" />
+
+            <ImageView
+                android:id="@+id/bulletA2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/mag" />
+
+            <ImageView
+                android:id="@+id/bulletA3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/mag" />
+
+            <ImageView
+                android:id="@+id/bulletA4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/mag" />
+
+            <ImageView
+                android:id="@+id/bulletA5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/mag" />
+
+            <TextView
+                android:id="@+id/remainBullet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dunggeunmo"
+                android:text="10"
+                android:textColor="@color/white"
+                android:textSize="32dp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/reloadBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClickReloadBtn"
+            app:srcCompat="@drawable/reloadbutton"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/dunggeunmo"
+        android:textColor="@android:color/white"
+        android:textSize="26dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gameView"
+        app:layout_constraintVertical_bias="0.041" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

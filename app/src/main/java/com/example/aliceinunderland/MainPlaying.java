@@ -163,10 +163,9 @@ public class MainPlaying extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    public void gameClear() {
+    public void gameEnd() {
         Intent intent = new Intent(this, MainEnd.class);
         startActivity(intent);
         finish();
     }
-
 }
