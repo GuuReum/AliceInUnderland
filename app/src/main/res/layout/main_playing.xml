@@ -32,21 +32,21 @@
         app:layout_constraintTop_toBottomOf="@+id/gameView"
         app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
+        <com.example.aliceinunderland.ButtonUIView
             android:id="@+id/moveLeftBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:onClick="onClickLeftBtn"
+
             app:srcCompat="@drawable/moveleftbutton"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <ImageView
+        <com.example.aliceinunderland.ButtonUIView
             android:id="@+id/moveRightBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:onClick="onClickRightBtn"
+
             app:srcCompat="@drawable/moverightbutton"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -94,7 +94,7 @@
 
             <TextView
                 android:id="@+id/remainBullet"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/dunggeunmo"
                 android:text="10"
@@ -103,12 +103,12 @@
 
         </LinearLayout>
 
-        <ImageView
+        <com.example.aliceinunderland.ButtonUIView
             android:id="@+id/reloadBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onClickReloadBtn"
+
             app:srcCompat="@drawable/reloadbutton"
             tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
@@ -118,6 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/dunggeunmo"
+        android:onClick="clickPause"
         android:textColor="@android:color/white"
         android:textSize="26dp"
         app:layout_constraintBottom_toBottomOf="parent"
