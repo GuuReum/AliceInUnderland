@@ -26,28 +26,29 @@ public class FrameHelper extends AsyncTask<Integer, Integer, Integer> {
         PmY = integers[1];
 
         while (true) {
-            if (left) {
-                if (PmX >= 0)
-                    PmX -= 15;
-            }
-            if (right) {
-                if (PmX <= mGameView.getWidth() - player.getSize())
-                    PmX += 15;
-            }
-
-            for (Enemy e : enemy) {
-                if (e.getX() > player.getX()) {
-                    mGameView.setEnemyLeftImage(e);
-                    e.setX(e.getX() - 1);
+            if (!mPaused) {
+                if (left) {
+                    if (PmX >= 0)
+                        PmX -= 15;
                 }
-                if (e.getX() < player.getX()) {
-                    mGameView.setEnemyRightImage(e);
-                    e.setX(e.getX() + 1);
+                if (right) {
+                    if (PmX <= mGameView.getWidth() - player.getSize())
+                        PmX += 15;
                 }
+
+                for (Enemy e : enemy) {
+                    if (e.getX() > player.getX()) {
+                        mGameView.setEnemyLeftImage(e);
+                        e.setX(e.getX() - 1);
+                    }
+                    if (e.getX() < player.getX()) {
+                        mGameView.setEnemyRightImage(e);
+                        e.setX(e.getX() + 1);
+                    }
+                }
+
+                publishProgress(PmX, PmY);
             }
-
-            publishProgress(PmX, PmY);
-
             try {
                 Thread.sleep(16); // 1프레임 = 16밀리초
             } catch (Exception ex) {
@@ -80,5 +81,10 @@ public class FrameHelper extends AsyncTask<Integer, Integer, Integer> {
 
     public void removeEnemy(Enemy e) {
         enemy.remove(e);
+    }
+
+    private boolean mPaused = false;
+    public void pauseAnimator() {
+        mPaused = (!mPaused);
     }
 }
