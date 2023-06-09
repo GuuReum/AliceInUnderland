@@ -32,21 +32,21 @@
         app:layout_constraintTop_toBottomOf="@+id/gameView"
         app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
+        <com.example.aliceinunderland.ButtonUIView
             android:id="@+id/moveLeftBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:onClick="onClickLeftBtn"
+
             app:srcCompat="@drawable/moveleftbutton"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <ImageView
+        <com.example.aliceinunderland.ButtonUIView
             android:id="@+id/moveRightBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:onClick="onClickRightBtn"
+
             app:srcCompat="@drawable/moverightbutton"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -103,12 +103,12 @@
 
         </LinearLayout>
 
-        <ImageView
+        <com.example.aliceinunderland.ButtonUIView
             android:id="@+id/reloadBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onClickReloadBtn"
+
             app:srcCompat="@drawable/reloadbutton"
             tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
