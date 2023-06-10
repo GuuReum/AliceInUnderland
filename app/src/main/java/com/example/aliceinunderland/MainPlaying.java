@@ -1,5 +1,6 @@
 package com.example.aliceinunderland;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainPlaying extends AppCompatActivity {
@@ -16,6 +18,10 @@ public class MainPlaying extends AppCompatActivity {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public FrameHelper getFrameHelper() {
+        return frameHelper;
     }
 
     private FrameHelper frameHelper;
@@ -167,6 +173,42 @@ public class MainPlaying extends AppCompatActivity {
         Intent intent = new Intent(this, MainEnd.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {   // 뒤로가기 누르면 다이얼로그 생성
+        clickPause(timerText);
+    }
+
+    private long remaintime = 0;  //일시정지 시 남은 시간 값
+
+    public void clickPause(View v) {
+        frameHelper.pauseAnimator();  //적 움직임 멈추기
+        remaintime = timer.getRemainTime();  //타이머에서 남은 시간 불러오기
+        timer.cancel();  //타이머 캔슬
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Paused"); // 다이얼로그 제목
+        builder.setCancelable(false);   // 다이얼로그 화면 밖 터치 방지
+        builder.setPositiveButton("계속하기", new AlertDialog.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                clickResume();
+            }
+        });
+
+        builder.setNegativeButton("그만하기", new AlertDialog.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                gameClear();
+            }
+        });
+
+        builder.show(); // 다이얼로그 보이기
+    }
+
+    public void clickResume() {
+        frameHelper.pauseAnimator();  //적 움직임 시작
+        timer = new Timer(remaintime,1000,timerText,this);  //타이머 재설정
+        timer.start();  //타이머 시작
     }
 
 }
