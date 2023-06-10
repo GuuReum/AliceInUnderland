@@ -1,6 +1,8 @@
 package com.example.aliceinunderland;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,6 +25,7 @@ public class GameView extends View {
     private EntityCollisionHelper entityCollisionHelper = new EntityCollisionHelper();
     private Bitmap backgroundImage;
     private Context mContext;
+    private Activity mActivity;
 
     private int canvasHeight = 1;
     private int canvasWidth = 1;
@@ -148,9 +151,8 @@ public class GameView extends View {
         for (Enemy e : enemy) {
             if (e != null) {
                 if (!entityCollisionHelper.isDeadPlayer(e, player)) {
+                    ((MainPlaying) mContext).gameClear();
                     player.setAlive(false);
-                    //굳이 player Alive가 필요할까? 어차피 여기서 player가 사망하면 게임도 끝나니까, 필요 없다고 생각함.
-                    //여기서 player가 사망하면 game over로 넘어가도록 하자
                     break;
                 } else {
                     player.setAlive(true);
