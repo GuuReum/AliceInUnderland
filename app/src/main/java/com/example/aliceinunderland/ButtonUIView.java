@@ -1,10 +1,10 @@
-/*
+
 package com.example.aliceinunderland;
 
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
+
 import android.view.MotionEvent;
 
 public class ButtonUIView extends androidx.appcompat.widget.AppCompatImageView {
@@ -87,4 +87,4 @@ public class ButtonUIView extends androidx.appcompat.widget.AppCompatImageView {
 
 }
 
- */
+
