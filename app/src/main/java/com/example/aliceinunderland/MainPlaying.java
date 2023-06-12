@@ -3,8 +3,6 @@ package com.example.aliceinunderland;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +41,8 @@ public class MainPlaying extends AppCompatActivity {
         timer.start();
 
         remainBulletText = (TextView) findViewById(R.id.remainBullet);
+
+        startService(new Intent(this, BGMService.class));
 
         gameView = (GameView) findViewById(R.id.gameView);
         gameView.invalidate();
@@ -101,6 +101,7 @@ public class MainPlaying extends AppCompatActivity {
     }
 
     public void gameClear() {
+        stopService(new Intent(this, BGMService.class));
         Intent intent = new Intent(this, MainEnd.class);
         startActivity(intent);
         finish();

@@ -24,7 +24,12 @@
         <activity
             android:name=".MainPlaying"
             android:screenOrientation="landscape" />
+
         <activity android:name=".MainEnd" />
+
+        <service
+            android:name=".BGMService"
+            android:enabled="true" />
     </application>
 
 </manifest>

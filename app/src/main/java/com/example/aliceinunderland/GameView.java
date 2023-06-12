@@ -25,7 +25,8 @@ public class GameView extends View {
     private EntityCollisionHelper entityCollisionHelper = new EntityCollisionHelper();
     private Bitmap backgroundImage;
     private Context mContext;
-    private Activity mActivity;
+
+    private SoundHelper soundHelper;
 
     private int canvasHeight = 1;
     private int canvasWidth = 1;
@@ -51,6 +52,7 @@ public class GameView extends View {
         player.setPlayerImage(res.getDrawable(R.drawable.protaleft));
         //background 이미지 설정
         backgroundImage = BitmapFactory.decodeResource(res, R.drawable.background);
+        soundHelper = new SoundHelper();
     }
 
     boolean firstDraw = true;
@@ -110,11 +112,12 @@ public class GameView extends View {
                     checkEnemyDead((int) curX, (int) curY, wave);
                     player.shootBullet();
                     ((MainPlaying) mContext).loadBulletImage();
+                    soundHelper.shootSoundPlayer(mContext);
                 }
             }
             invalidate();
             return true;
-        }
+        } else if (player.getLoadedBullet() == 0) soundHelper.emptyMag(mContext);
         invalidate();
         return false;
     }

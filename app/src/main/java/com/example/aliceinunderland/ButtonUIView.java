@@ -15,16 +15,20 @@ public class ButtonUIView extends androidx.appcompat.widget.AppCompatImageView {
 
     private FrameHelper frameHelper;
 
+    private SoundHelper soundHelper;
+
     public ButtonUIView(Context context) {
         super(context);
         player = ((MainPlaying) context).getPlayer();
         mContext = context;
+        soundHelper = new SoundHelper();
     }
 
     public ButtonUIView(Context context, AttributeSet attrs) {
         super(context, attrs);
         player = ((MainPlaying) context).getPlayer();
         mContext = context;
+        soundHelper = new SoundHelper();
     }
 
     public boolean onTouchEvent(MotionEvent event) {
@@ -37,8 +41,9 @@ public class ButtonUIView extends androidx.appcompat.widget.AppCompatImageView {
                 player.setPlayerImage(getResources().getDrawable(R.drawable.protaleft));
                 frameHelper.setLeftAnimation();
             }
-            if (event.getAction() == MotionEvent.ACTION_UP)
+            if (event.getAction() == MotionEvent.ACTION_UP) {
                 frameHelper.setLeftAnimation();
+            }
             return true;
         }  //moveleft
 
@@ -53,6 +58,7 @@ public class ButtonUIView extends androidx.appcompat.widget.AppCompatImageView {
         }  //moveright
 
         if (id == R.id.reloadBtn) {
+            soundHelper.reloadPlayer(mContext);
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 if (player.isReloadAble()) {
                     player.prepareReload();
